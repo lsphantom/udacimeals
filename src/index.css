@@ -1,7 +1,50 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700,900');
+
 body {
   margin: 0;
   padding: 0;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif;
+  background-color: #2c3135 !important;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
+
+#weekly-meals {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-color: #2c3135;
+}
+
+.left-nav-links a,
+.right-nav-links a {
+  color: #9A9A9A;
+  font-size: 13px;
+}
+
+.left-nav-links a:hover,
+.left-nav-links a:focus,
+.right-nav-links a:hover,
+.right-nav-links a:focus {
+  color: #bd985c;
+}
+
+
+
+.app-brandname a {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.app-brandname a:hover,
+.app-brandname a:focus {
+  color: #bd985c;
+  text-decoration: none;
 }
 
 ul {
@@ -33,15 +76,29 @@ li {
 .icon-btn {
   background: none;
   border: none;
+  text-align: center;
+  min-width: 120px;
+  min-height: 100px;
+}
+
+.search-btn {
+  height: 40px;
+  min-width: 50px;
+  background: none;
+  border: none;
+  text-align: center;
 }
 
 .nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20px;
 }
 
-.shopping-list {
+.shopping-list,
+.pantry {
   background: none;
   font-size: 18px;
   border: none;
@@ -50,8 +107,111 @@ li {
 }
 
 .calendar {
-  margin-top: 0;
-  display: flex;
+  margin-top: 20px;
+}
+
+.week {
+  position: relative;
+}
+
+.date-selector {
+  position: absolute;
+  top: 6px;
+  left: 24px;
+}
+.date-selector a {
+  color: #9A9A9A;
+}
+.date-selector a:hover,
+.date-selector a:focus {
+  color: #6bbd5c;
+}
+
+.day-list > li {
+  display: inline-block;
+  min-width: 120px;
+  margin: 10px;
+  text-align: center;
+}
+
+.day-list > li > h3 {
+  text-transform: capitalize;
+  font-size: 18px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  margin-bottom: 0px;
+  color: #bd985c;
+}
+.day-list > li > p {
+  margin: 0px;
+  font-size: 8px;
+  color: #c5c0ae;
+}
+.day-meals {
+  max-width: 130px;
+  clear: none;
+  float: left;
+  margin: 10px;
+}
+.day-meals > li {
+  border-radius: 4px;
+  background-color: #fff;
+  margin: 10px auto;
+}
+.day-meals > li > .icon-btn {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  outline: none;
+}
+.day-meals > li > .icon-btn:hover {
+  cursor: pointer;
+}
+
+.foodcard {
+  display: block;
+  position: relative;
+  max-width: 120px;
+  padding: 4px;
+  margin: 10px auto;
+}
+.foodcard a,
+.foodcard a:hover,
+.foodcard a:focus {
+  color: #000;
+  text-decoration: none;
+}
+.foodcard h4 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  text-align: left;
+}
+.foodcard img {
+  border-radius: 4px;
+}
+
+.remove-meal {
+  position: absolute;
+  right: -6px;
+  padding: 1px;
+  top: -6px;
+  width: 16px;
+  height: 16px;
+  background-color: #e64c4c;
+  border-radius: 2.5em;
+  font-size: 9px;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 1px 2px 3px rgba(0,0,0,0.3);
+}
+.remove-meal > a {
+  font-weight: bold;
+  color: #fff;
+  display: block;
+  text-align: center;
+}
+.remove-meal > a:hover,
+.remove-meal > a:focus {
+  color: #000;
 }
 
 .icon-grid ul {
@@ -64,13 +224,26 @@ li {
   flex: 1;
 }
 
+.meal-type-sidebar {
+  position: absolute;
+  left: -140px;
+  top: 150px;
+}
 .meal-types {
-  display: flex;
+  display: block;
   justify-content: space-around;
   margin: 0;
   margin-left: 152px;
 }
-
+.meal-types li {
+  clear: both;
+  color: #bd985c;
+  text-transform: capitalize;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 900;
+  min-height: 150px;
+  padding-top: 60px;
+}
 .meal {
   font-size: 23px;
   display: flex;
@@ -117,6 +290,10 @@ li {
   text-align: center;
 }
 
+.search-container .food-list h3 {
+  font-size: 14px;
+}
+
 .food-input {
   width: 90%;
   padding: 10px;
@@ -151,6 +328,24 @@ li {
   align-items: center;
   padding: 10px;
   cursor: pointer;
+  margin: 8px 4px;
+  border: 1px solid #eee;
+  border-radius: 6px;
+}
+
+.cals {
+  font-size: 10px;
+  font-weight: bold;
+  color: #aaa;
+  margin-top: 5px;
+}
+.cals > span {
+  font-weight: normal;
+}
+
+.item-src {
+  font-size: 12px;
+  color: #777;
 }
 
 .food-list img {
@@ -167,7 +362,7 @@ li {
 }
 
 .ingredients-list li {
-  font-size: 24px;
+  font-size: 14px;
   padding: 5px;
 }
 
@@ -190,4 +385,42 @@ li {
   text-decoration: underline;
   font-size: 14px;
   margin-top: 5px;
+}
+.overlay {
+  z-index: 9999;
+  background-color: rgba(0,0,0,0.7);
+}
+.modal {
+  display: block;
+}
+
+
+/* PRINTABLE VER */
+#weekly-meals.printable {
+  background-color: #fff;
+  color: #000;
+}
+#weekly-meals.printable .date-selector,
+#weekly-meals.printable .foodcard img,
+#weekly-meals.printable .foodcard .remove-meal {
+  display: none;
+}
+#weekly-meals.printable .foodcard h4 {
+  height: 50px;
+}
+#weekly-meals.printable .day-list > li > h3,
+#weekly-meals.printable .meal-types li {
+  color: #333;
+}
+#weekly-meals.printable .meal-types li {
+  min-height: 75px;
+  padding-top: 0px;
+}
+#weekly-meals.printable .day-meals {
+  border-left: 1px solid #ddd;
+}
+#weekly-meals.printable .day-meals > li > .icon-btn {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  min-height: 60px;
 }

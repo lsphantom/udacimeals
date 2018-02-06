@@ -17,8 +17,8 @@ export default function FoodList ({ food, onSelect }) {
         <li onClick={() => onSelect(item)} key={item.label}>
           <h3>{trim(item.label)}</h3>
           <img src={item.image} alt={item.label} />
-          <div>{Math.floor(item.calories)} Calories</div>
-          <div>{item.source}</div>
+          <div className="cals">{Math.floor(item.calories)} <span>Kcal</span></div>
+          <div className="item-src">{item.source}</div>
         </li>
       ))}
     </ul>

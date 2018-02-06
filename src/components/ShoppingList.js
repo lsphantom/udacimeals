@@ -4,7 +4,7 @@ export default function ShoppingList ({ list }) {
   return (
     <div className='ingredients-list'>
       <h3 className='subheader'>
-        Your Shopping List
+        Shopping List
       </h3>
       <ul>
         {list.map((item) => (

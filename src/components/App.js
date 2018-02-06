@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { addRecipe, removeFromCalendar } from '../actions'
 import { capitalize } from '../utils/helper'
 import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o'
+import DateSelect from 'react-icons/lib/fa/caret-square-o-down'
 import Modal from 'react-modal'
 import ArrowRightIcon from 'react-icons/lib/fa/arrow-circle-right'
 import Loading from 'react-loading'
@@ -18,7 +19,15 @@ class App extends Component {
     food: null,
     ingredientsModalOpen: false,
     loadingFood: false,
+    printVersion: false,
   }
+
+  trim = (str) => (
+   str.length > 26
+    ? str.slice(0, 26) + '...'
+    : str
+  )
+
   openFoodModal = ({ meal, day }) => {
     this.setState(() => ({
       foodModalOpen: true,
@@ -49,7 +58,10 @@ class App extends Component {
         loadingFood: false,
       })))
   }
-  openIngredientsModal = () => this.setState(() => ({ ingredientsModalOpen: true }))
+  openIngredientsModal = (e) => {
+    e.preventDefault()
+    this.setState(() => ({ ingredientsModalOpen: true }))
+  }
   closeIngredientsModal = () => this.setState(() => ({ ingredientsModalOpen: false }))
   generateShoppingList = () => {
     return this.props.calendar.reduce((result, { meals }) => {
@@ -64,55 +76,92 @@ class App extends Component {
     .reduce((ings, { ingredientLines }) => ings.concat(ingredientLines), [])
   }
   render() {
-    const { foodModalOpen, loadingFood, food, ingredientsModalOpen } = this.state
+    const { foodModalOpen, loadingFood, food, ingredientsModalOpen, printVersion } = this.state
     const { calendar, selectRecipe, remove } = this.props
     const mealOrder = ['breakfast', 'lunch', 'dinner']
-
+    let printClass =  printVersion ? 'printable' : ''
 
     return (
-      <div className='container'>
+      <div id="weekly-meals" className={`container ${printClass}`}>
 
-        <div className='nav'>
-          <h1 className='header'>UdaciMeals</h1>
-          <button
-            className='shopping-list'
-            onClick={this.openIngredientsModal}>
-              Shopping List
-          </button>
-        </div>
-
-        <ul className='meal-types'>
-          {mealOrder.map((mealType) => (
-            <li key={mealType} className='subheader'>
-              {capitalize(mealType)}
-            </li>
-          ))}
-        </ul>
-
-        <div className='calendar'>
-          <div className='days'>
-            {calendar.map(({ day }) => <h3 key={day} className='subheader'>{capitalize(day)}</h3>)}
+        {/* Navigation */}
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+          <div className="container-fluid">
+            <div className="left-nav-links">
+              <a href="">Pantry / Recipes</a>
+            </div>
+            <div className="app-brandname">
+              <a href="/">Weekly Meals</a>
+            </div>
+            <div className="right-nav-links">
+              <a href="" onClick={this.openIngredientsModal}>Shopping List</a>
+            </div>
           </div>
-          <div className='icon-grid'>
-            {calendar.map(({ day, meals }) => (
-              <ul key={day}>
-                {mealOrder.map((meal) => (
-                  <li key={meal} className='meal'>
-                    {meals[meal]
-                      ? <div className='food-item'>
-                          <img src={meals[meal].image} alt={meals[meal].label}/>
-                          <button onClick={() => remove({meal, day})}>Clear</button>
-                        </div>
-                      : <button onClick={() => this.openFoodModal({meal, day})} className='icon-btn'>
+        </nav>
+
+        {/* Calendar and Meal Grid */}
+        <div className='calendar container'>
+
+          <div className="meal-type-sidebar">
+            <ul className="meal-types">
+              { mealOrder.map((meal, index) =>
+                <li key={index}>{meal.substring(0,1)}</li> )
+              }
+            </ul>
+          </div>
+
+
+          <div className="week container-fluid">
+          <div className="date-selector">
+            <a href=""><DateSelect size={16} /></a>
+          </div>
+           <ul className="day-list">
+           {
+            calendar.map((day, index) => 
+              <li key={index}>
+                <h3>{day.day.substring(0,3)}</h3>
+                <p>{/*?/?*/}</p>
+              </li>
+            )
+
+           }
+           </ul>
+
+          { calendar.map(({day, meals}, index) => 
+            <ul key={index} className="day-meals">
+           {
+            mealOrder.map( (meal, index) =>
+                <li key={index} className={meal}>
+                {meals[meal]
+                  ? <div className="foodcard">
+                    <div className="remove-meal">
+                      <a href="" onClick={(e) => {e.preventDefault(); remove({meal, day})}}>x</a>
+                    </div>
+                    <a href="">
+                    <img className="img-fluid"
+                      src={meals[meal].image}
+                      alt={meals[meal].label}
+                       />
+                    <h4>{this.trim(meals[meal].label)}</h4>
+                    </a>
+                    </div>
+                  : <button onClick={() => this.openFoodModal({meal, day})} className='icon-btn'>
                           <CalendarIcon size={30}/>
-                        </button>}
-                  </li>
-                ))}
-              </ul>
-            ))}
+                    </button>
+                }
+                </li>
+            )
+           }
+           </ul>
+           )
+          }
+
           </div>
+          
         </div>
 
+
+        {/* Modals */}
         <Modal
           className='modal'
           overlayClassName='overlay'
@@ -125,17 +174,17 @@ class App extends Component {
               ? <Loading delay={200} type='spin' color='#222' className='loading' />
               : <div className='search-container'>
                   <h3 className='subheader'>
-                    Find a meal for {capitalize(this.state.day)} {this.state.meal}.
+                    Add a meal for {capitalize(this.state.day)} {this.state.meal}.
                   </h3>
                   <div className='search'>
                     <input
-                      className='food-input'
+                      className='form-control'
                       type='text'
-                      placeholder='Search Foods'
+                      placeholder='Search Edamam Recipes...'
                       ref={(input) => this.input = input}
                     />
                     <button
-                      className='icon-btn'
+                      className='search-btn'
                       onClick={this.searchFood}>
                         <ArrowRightIcon size={30}/>
                     </button>
