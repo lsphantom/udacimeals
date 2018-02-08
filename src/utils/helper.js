@@ -3,3 +3,9 @@ export function capitalize (str = '') {
     ? ''
     : str[0].toUpperCase() + str.slice(1)
 }
+
+
+// Local storage functions
+export const saveCalendar = () => {
+
+}

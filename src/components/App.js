@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { addRecipe, removeFromCalendar } from '../actions'
 import { capitalize } from '../utils/helper'
 import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o'
+import Printer from 'react-icons/lib/fa/print'
+import EditIcon from 'react-icons/lib/fa/edit'
+import ListIcon from 'react-icons/lib/fa/list-alt'
 import DateSelect from 'react-icons/lib/fa/caret-square-o-down'
 import Modal from 'react-modal'
 import ArrowRightIcon from 'react-icons/lib/fa/arrow-circle-right'
@@ -58,6 +61,10 @@ class App extends Component {
         loadingFood: false,
       })))
   }
+  printToggle = (e) => {
+    e.preventDefault()
+    this.setState(() => ({ printVersion: !this.state.printVersion }))
+  }
   openIngredientsModal = (e) => {
     e.preventDefault()
     this.setState(() => ({ ingredientsModalOpen: true }))
@@ -88,13 +95,19 @@ class App extends Component {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
           <div className="container-fluid">
             <div className="left-nav-links">
-              <a href="">Pantry / Recipes</a>
+              <a href="">Pantry &amp; Recipes</a>
             </div>
             <div className="app-brandname">
               <a href="/">Weekly Meals</a>
             </div>
             <div className="right-nav-links">
-              <a href="" onClick={this.openIngredientsModal}>Shopping List</a>
+              <a href="" onClick={this.openIngredientsModal} title="Shopping List"><ListIcon size={18}/></a>
+              <a href="" onClick={this.printToggle} title="Print / Edit">
+                { this.state.printVersion
+                  ? <EditIcon size={18}/>
+                  : <Printer size={18}/>
+                }
+              </a>
             </div>
           </div>
         </nav>
@@ -113,7 +126,7 @@ class App extends Component {
 
           <div className="week container-fluid">
           <div className="date-selector">
-            <a href=""><DateSelect size={16} /></a>
+            <a href="" title="Set starting date"><DateSelect size={16} /></a>
           </div>
            <ul className="day-list">
            {
