@@ -7,7 +7,7 @@ import registerServiceWorker from './registerServiceWorker'
 import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from './reducers'
 import { Provider } from 'react-redux'
-
+import { loadState, saveState } from './utils/helper'
 
 
 const logger = store => next => action => {
@@ -20,15 +20,17 @@ const logger = store => next => action => {
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-//window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
+const persistedState = loadState();
 const store = createStore(
 	reducer,
-	composeEnhancers(
-    applyMiddleware(logger)
-  )
+  persistedState,
+	composeEnhancers(applyMiddleware(logger))
 )
 
+store.subscribe( () => {
+  saveState(store.getState());
+})
 
 
 ReactDOM.render(

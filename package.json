@@ -5,7 +5,9 @@
   "dependencies": {
     "bootstrap": "^4.0.0",
     "e": "0.0.4",
+    "moment": "^2.20.1",
     "react": "^16.0.0",
+    "react-datepicker": "^1.1.0",
     "react-dom": "^16.0.0",
     "react-icons": "^2.2.7",
     "react-loading": "^1.0.1",

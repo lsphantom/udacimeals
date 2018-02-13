@@ -6,13 +6,17 @@ import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o'
 import Printer from 'react-icons/lib/fa/print'
 import EditIcon from 'react-icons/lib/fa/edit'
 import ListIcon from 'react-icons/lib/fa/list-alt'
-import DateSelect from 'react-icons/lib/fa/caret-square-o-down'
 import Modal from 'react-modal'
 import ArrowRightIcon from 'react-icons/lib/fa/arrow-circle-right'
 import Loading from 'react-loading'
 import { fetchRecipes } from '../utils/api'
 import FoodList from './FoodList'
 import ShoppingList from './ShoppingList'
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
+import StartDateButton from './StartDateButton'
+
+import 'react-datepicker/dist/react-datepicker.css'
 
 class App extends Component {
   state = {
@@ -23,6 +27,7 @@ class App extends Component {
     ingredientsModalOpen: false,
     loadingFood: false,
     printVersion: false,
+    startDate: moment()
   }
 
   trim = (str) => (
@@ -30,6 +35,17 @@ class App extends Component {
     ? str.slice(0, 26) + '...'
     : str
   )
+
+  handleDateChange = (date) => {    
+    this.setState({
+      startDate: date
+    });
+  }
+
+  isWeekday = (date) => {
+    const day = date.day()
+    return day === 0
+  }
 
   openFoodModal = ({ meal, day }) => {
     this.setState(() => ({
@@ -126,7 +142,13 @@ class App extends Component {
 
           <div className="week container-fluid">
           <div className="date-selector">
-            <a href="" title="Set starting date"><DateSelect size={16} /></a>
+            <DatePicker
+              customInput={<StartDateButton />}
+              selected={this.state.startDate}
+              onChange={this.handleDateChange}
+              filterDate={this.isWeekday}
+              placeholderText="Select a weekday"
+            />
           </div>
            <ul className="day-list">
            {
@@ -159,7 +181,7 @@ class App extends Component {
                     </a>
                     </div>
                   : <button onClick={() => this.openFoodModal({meal, day})} className='icon-btn'>
-                          <CalendarIcon size={30}/>
+                          <CalendarIcon size={26}/>
                     </button>
                 }
                 </li>
