@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
 import {
 	ADD_RECIPE,
+	SET_DATES,
+	CLEAR_DATES,
 	REMOVE_FROM_CALENDAR,
 	ADD_ITEM_TO_PANTRY
 } from '../actions'
@@ -14,6 +16,23 @@ function food (state = {}, action) {
 				...state,
 				[recipe.label]: recipe
 			}
+		default :
+			return state
+	}
+}
+
+function dates (state = {}, action) {
+	switch (action.type) {
+		case SET_DATES :
+			const { start } = action
+			return {
+				...state,
+				start
+			}
+
+		case CLEAR_DATES :
+			return {}
+
 		default :
 			return state
 	}
@@ -103,5 +122,6 @@ function pantry (state = initialPantryState, action) {
 export default combineReducers({
 	food,
 	calendar,
+	dates,
 	pantry,
 })

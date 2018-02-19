@@ -27,7 +27,7 @@ class App extends Component {
     ingredientsModalOpen: false,
     loadingFood: false,
     printVersion: false,
-    startDate: moment()
+    startDate: moment(),
   }
 
   trim = (str) => (
@@ -36,7 +36,7 @@ class App extends Component {
     : str
   )
 
-  handleDateChange = (date) => {    
+  handleDateChange = (date) => { 
     this.setState({
       startDate: date
     });
@@ -130,7 +130,6 @@ class App extends Component {
 
         {/* Calendar and Meal Grid */}
         <div className='calendar container'>
-
           <div className="meal-type-sidebar">
             <ul className="meal-types">
               { mealOrder.map((meal, index) =>
@@ -155,7 +154,7 @@ class App extends Component {
             calendar.map((day, index) => 
               <li key={index}>
                 <h3>{day.day.substring(0,3)}</h3>
-                <p>{/*?/?*/}</p>
+                <p></p>
               </li>
             )
 

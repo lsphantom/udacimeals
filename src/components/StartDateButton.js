@@ -4,13 +4,13 @@ import DateSelect from 'react-icons/lib/fa/caret-square-o-down'
 
 
 class StartDateButton extends React.Component {
-
   render () {
+  	const {value} = this.props;
     return (
       <button
         className="set-date-button"
         onClick={this.props.onClick}
-        title="Set starting date">
+        title={value !== '' ? value : "Set starting date"}>
         <DateSelect size={16} />
       </button>
     )
