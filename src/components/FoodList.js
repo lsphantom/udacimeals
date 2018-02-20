@@ -8,7 +8,7 @@ function trim (str) {
 
 export default function FoodList ({ food, onSelect }) {
   if (food.length === 0) {
-    return <p>Your search has 0 results.</p>
+    return <p>No results.</p>
   }
 
   return (

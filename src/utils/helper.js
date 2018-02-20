@@ -26,3 +26,17 @@ export const saveState = (state) => {
 		// Log errors
 	}
 }
+
+/*const baseRecipe = {
+	id: 12345,
+	label: "+Recipe Name+",
+	image: "+??+",
+	source: "My Recipes",
+	ingredients: [{
+		item: "Ground Beef",
+		quantity: 0.0,
+		unit: "+unit+",
+	}],
+	instructions: "",
+	wwPoints: "",
+}*/

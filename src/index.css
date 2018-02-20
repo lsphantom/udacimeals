@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Kaushan+Script');
 
 body {
   margin: 0;
@@ -9,6 +10,10 @@ body {
 h1,h2,h3,h4,h5,h6 {
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
+}
+#pantry h4,
+#recipes h4 {
+  font-family: 'Kaushan Script', serif;
 }
 
 #weekly-meals {
@@ -43,9 +48,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .left-nav-links a:hover,
-.left-nav-links a:focus,
-.right-nav-links a:hover,
-.right-nav-links a:focus {
+.right-nav-links a:hover {
   color: #bd985c;
 }
 
@@ -212,6 +215,7 @@ li {
   text-align: left;
   padding: 4px;
   height: 40px;
+  line-height: 0.9em;
 }
 .foodcard img {
   border-top-left-radius: 4px;
@@ -423,6 +427,31 @@ li {
   display: block;
 }
 
+.hidden {
+  display: none;
+}
+
+#kitchen-container {
+  padding-top: 60px;
+}
+#pantry-wrap {
+  background-color: #6667B1;;
+  height: 100%;
+}
+
+#recipes-wrap {
+  background-color: #eee;
+  height: 100%;
+}
+
+#pantry {
+  padding: 20px;
+  color: #eee;
+}
+#recipes {
+  padding: 20px;
+}
+
 
 /* PRINTABLE VER */
 body < #weekly-meals.printable {
@@ -440,6 +469,9 @@ body < #weekly-meals.printable {
 #weekly-meals.printable .foodcard h4 {
   height: 50px;
 }
+#weekly-meals.printable .day-list > li {
+  margin: 10px 0px;
+}
 #weekly-meals.printable .day-list > li > h3,
 #weekly-meals.printable .meal-types li {
   color: #333;
@@ -450,9 +482,11 @@ body < #weekly-meals.printable {
 }
 #weekly-meals.printable .day-meals {
   border-left: 1px solid #ddd;
+  margin: 10px 0px;
 }
 #weekly-meals.printable .day-meals > li {
   height: 80px;
+  margin: 10px 0px;
 }
 #weekly-meals.printable .day-meals > li > .icon-btn {
   padding-top: 0px;
