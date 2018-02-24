@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { HashRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { addRecipe, removeFromCalendar } from '../actions'
 import { capitalize } from '../utils/helper'
 import Modal from 'react-modal'
@@ -12,7 +12,11 @@ import ShoppingList from './ShoppingList'
 import moment from 'moment'
 import WeeklyMeals from './WeeklyMeals'
 import MyKitchen from './MyKitchen'
+import RecipeDetails from './RecipeDetails'
+import NewRecipe from './NewRecipe'
 import 'react-datepicker/dist/react-datepicker.css'
+
+const uuidv1 = require('uuid/v1');
 
 class App extends Component {
   state = {
@@ -23,6 +27,7 @@ class App extends Component {
     ingredientsModalOpen: false,
     loadingFood: false,
     startDate: moment(),
+    newRecipeObj: {},
   }
 
   trim = (str) => (
@@ -30,6 +35,23 @@ class App extends Component {
     ? str.slice(0, 30) + '...'
     : str
   )
+
+  createNewRecipe = (recipe) => {
+    let recipeId = uuidv1();
+    let modRecipe = recipe;
+        modRecipe.id = recipeId;
+    const newRecipe = this.state.newRecipeObj;
+    const currentDay = this.state.day;
+    const currentMeal = this.state.meal;
+    this.setState({
+      newRecipeObj: {[recipeId]: modRecipe}
+    });
+    this.addRecipeToState(currentDay, currentMeal, newRecipe);
+  }
+
+  addRecipeToState = (day, meal, recipe) => {
+    this.props.selectRecipe({ day, meal, recipe});
+  }
 
   openFoodModal = ({ meal, day }) => {
     this.setState(() => ({
@@ -81,12 +103,11 @@ class App extends Component {
   }
   render() {
     const { foodModalOpen, loadingFood, food, ingredientsModalOpen } = this.state
-    const { selectRecipe } = this.props
     return (
       <div className="App">
 
         {/* Routing */}
-        <HashRouter>
+        <BrowserRouter>
           <Switch>
             <Route exact path="/" render={() =>
               <WeeklyMeals openAddFoodModal={this.openFoodModal} shoppingListModal={this.openIngredientsModal} />
@@ -94,8 +115,10 @@ class App extends Component {
             <Route path="/kitchen" render={() =>
               <MyKitchen />
             }/>
+            <Route exact path="/recipes/new/" component={NewRecipe} />
+            <Route path="/recipes/:recipe_id" component={RecipeDetails} />
           </Switch>
-        </HashRouter>
+        </BrowserRouter>
 
 
 
@@ -131,7 +154,8 @@ class App extends Component {
                     <FoodList
                       food={food}
                       onSelect={(recipe) => {
-                        selectRecipe({ recipe, day: this.state.day, meal: this.state.meal })
+                        //this.createNewRecipe(recipe)
+                        this.props.selectRecipe({day: this.state.day, meal: this.state.meal, recipe})
                         this.closeFoodModal()
                       }}
                     />)}

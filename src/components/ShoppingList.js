@@ -3,16 +3,17 @@ import React from 'react'
 export default function ShoppingList ({ list }) {
   return (
     <div className='ingredients-list'>
-      <h3 className='subheader'>
-        Shopping List
-      </h3>
-      <ul>
-        {list.map((item) => (
-          <li key={item}>
-            {item}
-          </li>
-        ))}
-      </ul>
+      <h3 className='subheader'>Shopping List</h3>
+      { list.length < 1
+        ? <p>-No items for your shopping list-</p>
+        : <ul className='shopping-list'>
+            {list.map((item) => (
+              <li key={item}>
+                {item}
+              </li>
+            ))}
+          </ul>
+      }
     </div>
   )
 }

@@ -97,6 +97,7 @@ render (){
 
 
           <div className="week container-fluid">
+
           <div className="date-selector">
             <DatePicker
               customInput={<StartDateButton />}
@@ -106,6 +107,7 @@ render (){
               placeholderText="Select a weekday"
             />
           </div>
+
            <ul className="day-list">
            {
             calendar.map((day, index) => 
