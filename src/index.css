@@ -74,6 +74,103 @@ h1,h2,h3,h4,h5,h6 {
   padding-top: 20px;
 }
 
+.add-recipe-form {
+  margin: 20px auto;
+  max-width: 650px;
+}
+
+.add-recipe-form input[type="text"],
+.add-recipe-form textarea {
+  background-color: #efefef;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  color: #444;
+  border: none;
+}
+
+.add-recipe-form input[type="text"]::placeholder {
+  color: #bbb;
+}
+
+.add-recipe-form #name {
+  font-size: 30px;
+}
+
+.add-recipe-form #instructions {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.add-recipe-form-heading {
+  font-family: 'Kaushan Script', serif;
+  font-size: 16px;
+  color: #bd985c;
+}
+
+.ingredient-row input {
+  display: inline;
+  font-weight: normal;
+  font-size: 14px;
+  margin: 2px 1%;
+}
+
+#ingredientName {
+  width: 58%;
+}
+#ingredientQuantity {
+  width: 13%;
+}
+#ingredientUnit {
+  width: 13%;
+}
+#ingredient-submit {
+  width: 8%;
+}
+
+
+#ingredients-preview-list {
+  border: 1px dashed #ddd;
+  border-radius: 2px;
+  padding: 10px 40px;
+  margin: 10px auto;
+}
+#ingredients-preview-list li {
+  list-style-type: disc;
+  list-style-position: inside;
+  font-family: 'Poppins', sans-serif;
+  font-weight: normal;
+  font-size: 13px;
+  color: #444;
+}
+
+.point-system {
+  max-width: 450px;
+  margin: 10px auto;
+  text-align: center;
+}
+
+.ww-logo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  color: #008ddf;  
+  margin-bottom: 0px;
+}
+
+#wwPoints {
+  width: 60px;
+  height: 40px;
+  border-radius: 20px;
+  float: none;
+  margin: 0px auto;
+}
+
+#submit-recipe {
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
 ul {
   padding-left: 0;
 }

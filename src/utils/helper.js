@@ -29,7 +29,7 @@ export const saveState = (state) => {
 
 /*const baseRecipe = {
 	id: 12345,
-	label: "+Recipe Name+",
+	name: "+Recipe Name+",
 	image: "+??+",
 	source: "My Recipes",
 	ingredients: [{

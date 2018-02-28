@@ -31,6 +31,13 @@ export function removeRecipe ({day, meal, recipes}) {
 	}
 }
 
+export function addToMyRecipes ( recipe ) {
+	return {
+		type: MY_RECIPES_ADD,
+		recipe
+	}
+}
+
 
 export function setDates ( {start} ) {
 	return {
