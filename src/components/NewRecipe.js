@@ -1,12 +1,15 @@
 import React, {Component} from 'react'
-//import { connect } from 'react-redux'
-//import { addRecipe, removeFromCalendar } from '../actions'
+import { connect } from 'react-redux'
+import { addToMyRecipes } from '../actions'
 import { Link } from 'react-router-dom'
 //import ImageInput from './ImageInput'
 
+const uuidv4 = require('uuid/v4');
+
+
 class NewRecipe extends Component {
 state = {
-	name: '',
+	label: '',
 	imageURL: '',
 	imageData: '',
 	ingredients: [],
@@ -44,8 +47,24 @@ clearIngredientEntries(){
 	})
 }
 
+addNewRecipe(e){
+	e.preventDefault();
+	let recipeID = uuidv4();
+
+	let newRecipe = {
+		id: recipeID,
+		label: this.state.label,
+		image: this.state.imageURL,
+		ingredients: this.state.ingredients,
+		instructions: this.state.instructions,
+		wwPoints: this.state.wwPoints,
+	}
+
+	this.props.dispatch(addToMyRecipes(newRecipe));
+}
+
 render(){
-	const {ingredients} = this.state;
+	const {label, instructions, ingredients} = this.state;
 	return (
 		<div>
 			<nav id="secondaryNav" className="navbar navbar-expand-lg">
@@ -61,7 +80,7 @@ render(){
 			<div id="add-recipe-container" className="container-fluid">
 				<form className="add-recipe-form">
 					<p className="add-recipe-form-heading">Let's name this recipe</p>
-					<input id="name"
+					<input id="label"
 							type="text"
 							className="form-control"
 							placeholder="Recipe Name"
@@ -121,7 +140,13 @@ render(){
 								onChange={(event) => this.handleInputChange(event)}
 						/>
 						</div>
-						<input id="submit-recipe" type="submit" className="btn btn-primary btn-block" value="Submit" />
+						<input id="submit-recipe"
+								type="submit"
+								className="btn btn-primary btn-block"
+								disabled={label.length === 0 || instructions.length === 0 ? true : false}
+								value="Submit"
+								onClick={(e) => this.addNewRecipe(e)}
+						/>
 					</div>
 				</form>
 			</div>
@@ -131,4 +156,12 @@ render(){
 }
 
 
-export default NewRecipe;
+function mapStateToProps({recipes, food}){
+	return{ recipes, food, }
+}
+
+function mapDispatchToProps(dispatch){
+	return{dispatch}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewRecipe);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom'
 import { addRecipe, removeFromCalendar } from '../actions'
 import { capitalize } from '../utils/helper'
 import Modal from 'react-modal'
@@ -103,11 +103,12 @@ class App extends Component {
   }
   render() {
     const { foodModalOpen, loadingFood, food, ingredientsModalOpen } = this.state
+    const { myRecipes } = this.props.recipes
     return (
       <div className="App">
 
         {/* Routing */}
-        <BrowserRouter>
+        <HashRouter>
           <Switch>
             <Route exact path="/" render={() =>
               <WeeklyMeals openAddFoodModal={this.openFoodModal} shoppingListModal={this.openIngredientsModal} />
@@ -118,7 +119,7 @@ class App extends Component {
             <Route exact path="/recipes/new/" component={NewRecipe} />
             <Route path="/recipes/:recipe_id" component={RecipeDetails} />
           </Switch>
-        </BrowserRouter>
+        </HashRouter>
 
 
 
@@ -159,6 +160,17 @@ class App extends Component {
                         this.closeFoodModal()
                       }}
                     />)}
+
+                  {myRecipes && myRecipes.length > 0
+                    ? <FoodList
+                      food={myRecipes}
+                      onSelect={(recipe) => {
+                        this.props.selectRecipe({day: this.state.day, meal: this.state.meal, recipe})
+                        this.closeFoodModal()
+                      }}
+                    />
+                    : <p>You don't have any recipes.</p>
+                  }
                 </div>}
           </div>
         </Modal>
@@ -177,7 +189,7 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ food, calendar }) {
+function mapStateToProps ({ food, calendar, recipes }) {
   const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
   return {
@@ -191,6 +203,7 @@ function mapStateToProps ({ food, calendar }) {
         return meals
       }, {})
     })),
+    recipes,
   }
 }
 

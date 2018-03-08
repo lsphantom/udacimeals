@@ -8,6 +8,7 @@ render(){
 	return (
 		<div>
 			<h2>Recipe Details</h2>
+			<p>* RECIPE DETAILS NOT YET AVAILABLE</p>
 		</div>
 	)
 }

@@ -8,7 +8,8 @@ render (){
 		<div id="pantry">
 		<h4>Pantry</h4>
 		<hr />
-		<p>There are no items in your pantry.</p>
+		<p className="app-alert-warning">* THE PANTRY FUNCTION IS NOT YET AVAILABLE</p>
+		<p><em>There are no items in your pantry.</em></p>
 
 		</div>
 	)

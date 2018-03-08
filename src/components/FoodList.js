@@ -16,9 +16,16 @@ export default function FoodList ({ food, onSelect }) {
       {food.map((item, index) => (
         <li onClick={() => onSelect(item)} key={index}>
           <h3>{trim(item.label)}</h3>
-          <img src={item.image} alt={item.label} />
-          <div className="cals">{Math.floor(item.calories)} <span>Kcal</span></div>
-          <div className="item-src">{item.source}</div>
+          <img src={item.image} alt={item.label ? item.label : item.name} />
+          {item.calories
+            ? <div className="cals">{Math.floor(item.calories)} <span>Kcal</span></div>
+            : null
+          }
+          {item.source
+            ? <div className="item-src">{item.source}</div>
+            : <div className="item-src">My Recipes</div>
+          }
+          
         </li>
       ))}
     </ul>
