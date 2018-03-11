@@ -7,8 +7,8 @@ export default function ShoppingList ({ list }) {
       { list.length < 1
         ? <p>-No items for your shopping list-</p>
         : <ul className='shopping-list'>
-            {list.map((item) => (
-              <li key={item}>
+            {list.map((item, index) => (
+              <li key={index}>
                 {item}
               </li>
             ))}

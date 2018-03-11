@@ -39,6 +39,13 @@ addIngredient(event){
 	})
 	this.clearIngredientEntries();
 }
+removeIngredient(ingredient){
+	let {ingredients} = this.state;
+	let newIngredients = ingredients.filter(ing => ing.name !== ingredient);
+	this.setState({
+		ingredients: newIngredients,
+	})
+}
 clearIngredientEntries(){
 	this.setState({
 		ingredientName: '',
@@ -61,6 +68,7 @@ addNewRecipe(e){
 	}
 
 	this.props.dispatch(addToMyRecipes(newRecipe));
+	this.props.history.push('/kitchen');
 }
 
 render(){
@@ -79,7 +87,7 @@ render(){
 			</nav>
 			<div id="add-recipe-container" className="container-fluid">
 				<form className="add-recipe-form">
-					<p className="add-recipe-form-heading">Let's name this recipe</p>
+					<p className="add-recipe-form-heading">Let's name this recipe <span className="redbull">&bull;</span></p>
 					<input id="label"
 							type="text"
 							className="form-control"
@@ -111,8 +119,8 @@ render(){
 							{
 								ingredients.length === 0
 								? null
-								: ingredients.map(ingredient => 
-									<li>{`${ingredient.name} ${ingredient.quantity} ${ingredient.unit}`}</li>
+								: ingredients.map((ingredient, index) => 
+									<li key={index}>{`${ingredient.name} ${ingredient.quantity} ${ingredient.unit}`} <a href="" onClick={(e) => {e.preventDefault(); this.removeIngredient(ingredient.name)}}>x</a></li>
 								)
 							}
 						</ul>
@@ -120,7 +128,7 @@ render(){
 
 						<hr/>
 
-						<p className="add-recipe-form-heading">Let's add some cooking instructions</p>
+						<p className="add-recipe-form-heading">Let's add some cooking instructions <span className="redbull">&bull;</span></p>
 						<textarea id="instructions"
 								type="text" 
 								className="form-control"

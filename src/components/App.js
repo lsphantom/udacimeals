@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { HashRouter, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { addRecipe, removeFromCalendar } from '../actions'
 import { capitalize } from '../utils/helper'
 import Modal from 'react-modal'
@@ -47,6 +47,15 @@ class App extends Component {
       newRecipeObj: {[recipeId]: modRecipe}
     });
     this.addRecipeToState(currentDay, currentMeal, newRecipe);
+  }
+  addIdToRecipe = (edamamRecipe) => {
+    let recipeId = uuidv1();
+    let modRecipe = edamamRecipe.recipe;
+        modRecipe.id = recipeId;
+    const {day, meal} = edamamRecipe;
+
+    this.addRecipeToState(day,meal, modRecipe);
+    this.closeFoodModal();
   }
 
   addRecipeToState = (day, meal, recipe) => {
@@ -96,10 +105,10 @@ class App extends Component {
       breakfast && result.push(breakfast)
       lunch && result.push(lunch)
       dinner && result.push(dinner)
-
+      console.log(result);
       return result
     }, [])
-    .reduce((ings, { ingredientLines }) => ings.concat(ingredientLines), [])
+    .reduce((ings, { ingredients }) => ings.concat(ingredients), [])
   }
   render() {
     const { foodModalOpen, loadingFood, food, ingredientsModalOpen } = this.state
@@ -108,7 +117,7 @@ class App extends Component {
       <div className="App">
 
         {/* Routing */}
-        <HashRouter>
+        <BrowserRouter>
           <Switch>
             <Route exact path="/" render={() =>
               <WeeklyMeals openAddFoodModal={this.openFoodModal} shoppingListModal={this.openIngredientsModal} />
@@ -119,7 +128,7 @@ class App extends Component {
             <Route exact path="/recipes/new/" component={NewRecipe} />
             <Route path="/recipes/:recipe_id" component={RecipeDetails} />
           </Switch>
-        </HashRouter>
+        </BrowserRouter>
 
 
 
@@ -155,11 +164,14 @@ class App extends Component {
                     <FoodList
                       food={food}
                       onSelect={(recipe) => {
-                        //this.createNewRecipe(recipe)
-                        this.props.selectRecipe({day: this.state.day, meal: this.state.meal, recipe})
-                        this.closeFoodModal()
+                        this.addIdToRecipe({day: this.state.day, meal: this.state.meal, recipe})
                       }}
                     />)}
+
+                  <div className="search-modal-myrecipes">
+                    <hr />
+                    <p>Add from your recipes:</p>
+                  
 
                   {myRecipes && myRecipes.length > 0
                     ? <FoodList
@@ -171,6 +183,9 @@ class App extends Component {
                     />
                     : <p>You don't have any recipes.</p>
                   }
+
+                  </div>
+
                 </div>}
           </div>
         </Modal>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { fetchRecipes } from '../utils/api'
-import { addRecipe, removeFromCalendar } from '../actions'
+import { addRecipe, removeFromCalendar, setDates } from '../actions'
 import { Link } from 'react-router-dom'
 import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o'
 import DatePicker from 'react-datepicker'
@@ -27,6 +27,7 @@ class WeeklyMeals extends Component {
     this.setState({
       startDate: date
     });
+    this.props.setStartingDate(date);
   }
 
   isWeekday = (date) => {
@@ -113,7 +114,10 @@ render (){
             calendar.map((day, index) => 
               <li key={index}>
                 <h3>{day.day.substring(0,3)}</h3>
-                <p></p>
+                <p>{this.props.dates !== ''
+                  ? moment(this.props.dates).add(index, 'days').format('MM/DD')
+                  : null
+                }</p>
               </li>
             )
 
@@ -130,11 +134,12 @@ render (){
                     <div className="remove-meal">
                       <a href="" onClick={(e) => {e.preventDefault(); remove({meal, day}); }}>x</a>
                     </div>
-                    <Link to={`/recipes/${meals[meal].label}`}>
-                    <img className="img-fluid"
+                    <Link to={`/meals/${day}/${meal}`}>
+                    <div className="meal-thumb" style={{backgroundImage: `url(${meals[meal].image})`}}></div>
+                    {/*<img className="img-fluid"
                       src={meals[meal].image}
                       alt={meals[meal].label}
-                       />
+                       />*/}
                     <h4>{printVersion ? meals[meal].label : this.trim(meals[meal].label)}</h4>
                     </Link>
                     </div>
@@ -160,7 +165,7 @@ render (){
 
 
 
-function mapStateToProps ({ food, calendar }) {
+function mapStateToProps ({ food, calendar, dates }) {
   const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
   return {
@@ -174,7 +179,8 @@ function mapStateToProps ({ food, calendar }) {
         return meals
       }, {})
     })),
-    food
+    food,
+    dates,
   }
 }
 
@@ -182,6 +188,7 @@ function mapDispatchToProps (dispatch) {
   return {
     selectRecipe: (data) => dispatch(addRecipe(data)),
     remove: (data) => dispatch(removeFromCalendar(data)),
+    setStartingDate: (data) => dispatch(setDates(data)),
   }
 }
 

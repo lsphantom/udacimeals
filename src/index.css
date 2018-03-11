@@ -11,6 +11,12 @@ h1,h2,h3,h4,h5,h6 {
   font-family: 'Poppins', sans-serif;
   font-weight: 500;
 }
+.App {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #2c3135;
+}
 #pantry h4,
 #recipes h4 {
   font-family: 'Kaushan Script', serif;
@@ -21,7 +27,11 @@ h1,h2,h3,h4,h5,h6 {
   left: 0;
   right: 0;
   height: 100%;
-  background-color: #2c3135;
+  /*background-color: #2c3135;*/
+}
+
+#mainNav {
+  background-color: #343a40;
 }
 
 .left-nav-links {
@@ -87,6 +97,17 @@ h1,h2,h3,h4,h5,h6 {
 .my-recipes-item-thumb {
   max-height: 180px;
 }
+.img-thumb {
+  min-height: 150px;
+  background-color: #ddd;
+  background-size: cover;
+  background-position: center center;
+  margin-top: -10px;
+  margin-left: -10px;
+  margin-right: -10px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
 .my-recipes-item-label {
   font-family: 'Poppins', sans-serif;
   font-weight: bold;
@@ -96,7 +117,8 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 #add-recipe-container {
-  padding-top: 20px;
+  padding: 20px 15px;
+  background-color: #fff; 
 }
 
 .add-recipe-form {
@@ -166,6 +188,10 @@ h1,h2,h3,h4,h5,h6 {
   font-weight: normal;
   font-size: 13px;
   color: #444;
+}
+#ingredients-preview-list li a {
+  color: red;
+  margin-left: 10px;
 }
 
 .point-system {
@@ -348,6 +374,16 @@ li {
 .foodcard img {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
+  height: 120px;
+}
+
+.meal-thumb {
+  height: 120px;
+  background-color: #ddd;
+  background-size: cover;
+  background-position: center center;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .remove-meal {
@@ -453,6 +489,9 @@ li {
 
 .search-container .food-list h3 {
   font-size: 14px;
+}
+
+.search-modal-myrecipes {
 }
 
 .food-input {
@@ -571,6 +610,11 @@ li {
 #recipes-wrap {
   background-color: #eee;
   height: 100%;
+  position: absolute;
+  width: 80%;
+  right: 0;
+  top: 0px;
+  padding-top: 60px;
 }
 
 .add-recipe a {
@@ -585,6 +629,26 @@ li {
   background-size: 20px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   font-size: 0;
+}
+
+.btn-add-recipe {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fb3d3c+0,ff8400+100 */
+background: #fb3d3c; /* Old browsers */
+background: -moz-linear-gradient(top,  #fb3d3c 0%, #ff8400 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #fb3d3c 0%,#ff8400 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #fb3d3c 0%,#ff8400 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fb3d3c', endColorstr='#ff8400',GradientType=0 ); /* IE6-9 */
+border: 0;
+}
+.btn-add-recipe:hover,
+.btn-add-recipe:active {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fb3d3c+0,ff8400+100 */
+background: #fb3d3c; /* Old browsers */
+background: -moz-linear-gradient(top,  #fb3d3c 0%, #fb3d3c 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #fb3d3c 0%,#fb3d3c 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #fb3d3c 0%,#fb3d3c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fb3d3c', endColorstr='#fb3d3c',GradientType=0 ); /* IE6-9 */
+border: 0;
 }
 
 .recipe-image {
@@ -612,6 +676,12 @@ li {
   font-size: 0;
 }
 
+.redbull {
+  color: #ff2e53;
+  vertical-align: middle;
+  font-family: sans-serif;
+}
+
 #pantry {
   padding: 20px;
   color: #eee;
@@ -619,6 +689,14 @@ li {
 #recipes {
   padding: 20px;
 }
+
+.recipe-wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+
 
 
 /* PRINTABLE VER */
@@ -628,11 +706,29 @@ body < #weekly-meals.printable {
 #weekly-meals.printable {
   background-color: #fff;
   color: #000;
+  max-width: 100%;
+  padding-left: 10%;
+}
+#weekly-meals.printable #mainNav {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+#weekly-meals.printable .app-brandname a {
+  color: #222;
+}
+#weekly-meals.printable .calendar {
+  position: relative;
+  margin-top: 30px;
 }
 #weekly-meals.printable .date-selector,
 #weekly-meals.printable .foodcard img,
+#weekly-meals.printable .foodcard .meal-thumb,
 #weekly-meals.printable .foodcard .remove-meal {
   display: none;
+}
+#weekly-meals.printable .meal-type-sidebar {
+  left: -150px;
+  top: 95px;
 }
 #weekly-meals.printable .foodcard h4 {
   height: 50px;

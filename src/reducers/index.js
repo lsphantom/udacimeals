@@ -60,17 +60,14 @@ function recipes (state = initialRecipesState, action) {
 	}
 }
 
-function dates (state = {}, action) {
+function dates (state = '', action) {
 	switch (action.type) {
 		case SET_DATES :
-			const { start } = action
-			return {
-				...state,
-				start
-			}
+			const start = action.start
+			return start
 
 		case CLEAR_DATES :
-			return {}
+			return ''
 
 		default :
 			return state

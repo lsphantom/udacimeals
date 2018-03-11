@@ -39,7 +39,7 @@ export function addToMyRecipes ( recipe ) {
 }
 
 
-export function setDates ( {start} ) {
+export function setDates (start) {
 	return {
 		type: SET_DATES,
 		start,

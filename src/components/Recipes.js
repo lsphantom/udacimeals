@@ -11,9 +11,7 @@ render (){
 			<hr />
 
 
-			<div className="add-recipe">
-				<Link to="/recipes/new/" />
-			</div>
+			<Link to="/recipes/new/" className="btn btn-primary btn-add-recipe">+ Add a recipe</Link>
 
 
 			{myRecipes.length > 0 
@@ -24,11 +22,12 @@ render (){
 
 			<div className="my-recipes-list">
 			{myRecipes.length > 0
-				? myRecipes.map((recipe) =>
-					<Link to={`/recipes/${recipe.id}`}>
+				? myRecipes.map((recipe, index) =>
+					<Link to={`/recipes/${recipe.id}`} key={index}>
 					<div className="my-recipes-item">
 					<div className="my-recipes-item-thumb">
-						<img className="img-fluid" src={recipe.image} alt={recipe.label} />
+						<div className="img-thumb" style={{backgroundImage: `url(${recipe.image})`}}></div>
+						{/*<img className="img-fluid" src={recipe.image} alt={recipe.label} />*/}
 					</div>
 					<p className="my-recipes-item-label">{recipe.label}</p>
 					</div>

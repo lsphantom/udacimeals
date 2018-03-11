@@ -13,7 +13,7 @@ render (){
 	let linkTo = (page === 0 ? "/kitchen" : "/");
 
 	return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <nav className="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
           <div className="container-fluid">
             <div className="left-nav-links">
               <Link to={linkTo}>{oppositePage}</Link>
