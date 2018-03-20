@@ -48,6 +48,8 @@ h1,h2,h3,h4,h5,h6 {
   margin: 4px auto;
 }
 
+.app-alert-warning {
+}
 
 .left-nav-links a,
 .right-nav-links a {
@@ -207,6 +209,34 @@ h1,h2,h3,h4,h5,h6 {
   color: #008ddf;  
   margin-bottom: 0px;
 }
+.ww-circle-logo {
+  display: inline-block;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background-color: #008ddf;
+  color: #fff;
+  border-radius: 2.5em;
+  margin-bottom: -5px;
+}
+.ww-circle-logo:before {
+  content: 'W';
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 10px;
+  position: absolute;
+  top: 3px;
+  left: 26%;
+}
+.ww-circle-logo:after {
+  content: 'W';
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  font-size: 10px;
+  position: absolute;
+  bottom: 1px;
+  left: 26%;
+}
 
 #wwPoints {
   width: 60px;
@@ -303,6 +333,14 @@ li {
 .date-selector button:hover,
 .date-selector button:focus {
   color: #6bbd5c;
+}
+.date-clearing {
+  text-align: center;
+}
+.danger-txt,
+.danger-txt:hover,
+.danger-txt:focus {
+  color: red;
 }
 
 .react-datepicker-popper {
@@ -492,6 +530,13 @@ li {
 }
 
 .search-modal-myrecipes {
+  text-align: center;
+}
+
+.i-note {
+  font-style: italic;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .food-input {
@@ -698,6 +743,43 @@ border: 0;
 }
 
 
+/* Recipe details */
+.recipe-image-banner {
+  height: 250px;
+  background-color: #ddd;
+  background-size: cover;
+  background-position: center center;
+}
+.recipe-detail-textbox{
+  margin-top: -85px;
+}
+.recipe-detail-ingredients ul li {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+.recipe-detail-ingredients ul li,
+.recipe-detail-instructions p {
+  font-size: 13px;
+}
+.recipe-detail-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 45px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+
+/* Datepicker adjust */
+.date-selector .react-datepicker__day--today {
+    background-color: transparent;
+}
+.date-selector .react-datepicker__day:hover {
+    background-color: #ddb574;
+}
+.date-selector .react-datepicker__day--disabled:hover {
+    background-color: transparent;
+}
 
 /* PRINTABLE VER */
 body < #weekly-meals.printable {

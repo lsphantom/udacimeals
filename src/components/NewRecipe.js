@@ -13,6 +13,7 @@ state = {
 	imageURL: '',
 	imageData: '',
 	ingredients: [],
+	ingredientLines: [],
 	instructions: '',
 	wwPoints: null,
 	ingredientName: '',
@@ -28,22 +29,29 @@ handleInputChange(input){
 addIngredient(event){
 	event.preventDefault();
 	let currentIngredients = this.state.ingredients;
+	let currentIngredientLines = this.state.ingredientLines;
 	let newIngredient = {
 		name: this.state.ingredientName,
 		quantity: this.state.ingredientQuantity,
 		unit: this.state.ingredientUnit,
 	}
+	let ingredientLine = this.state.ingredientName;
+
 	currentIngredients.push(newIngredient);
+	currentIngredientLines.push(ingredientLine);
 	this.setState({
 		ingredients: currentIngredients,
+		ingredientLines: currentIngredientLines,
 	})
 	this.clearIngredientEntries();
 }
 removeIngredient(ingredient){
-	let {ingredients} = this.state;
+	let {ingredients, ingredientLines} = this.state;
 	let newIngredients = ingredients.filter(ing => ing.name !== ingredient);
+	let newIngredientLines = ingredientLines.filter(ing => ing !== ingredient);
 	this.setState({
 		ingredients: newIngredients,
+		ingredientLines: newIngredientLines,
 	})
 }
 clearIngredientEntries(){
@@ -63,6 +71,7 @@ addNewRecipe(e){
 		label: this.state.label,
 		image: this.state.imageURL,
 		ingredients: this.state.ingredients,
+		ingredientLines: this.state.ingredientLines,
 		instructions: this.state.instructions,
 		wwPoints: this.state.wwPoints,
 	}

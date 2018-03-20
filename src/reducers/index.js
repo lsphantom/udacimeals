@@ -9,6 +9,7 @@ import {
 	SET_DATES,
 	CLEAR_DATES,
 	REMOVE_FROM_CALENDAR,
+	CLEAR_MEALS,
 	ADD_ITEM_TO_PANTRY
 } from '../actions'
 
@@ -132,6 +133,8 @@ function calendar (state = initialCalendarState, action) {
 					[meal]: null,
 				}
 			}
+		case CLEAR_MEALS:
+			return initialCalendarState
 		default:
 			return state
 	}

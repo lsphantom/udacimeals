@@ -10,6 +10,7 @@ export const SET_DATES = 'SET_DATES'
 export const CLEAR_DATES = 'CLEAR_DATES'
 
 export const REMOVE_FROM_CALENDAR = 'REMOVE_FROM_CALENDAR'
+export const CLEAR_MEALS = 'CLEAR_MEALS'
 
 export const ADD_ITEM_TO_PANTRY = 'ADD_ITEM_TO_PANTRY'
 
@@ -38,6 +39,13 @@ export function addToMyRecipes ( recipe ) {
 	}
 }
 
+export function deleteFromMyRecipes ( recipes ) {
+	return {
+		type: MY_RECIPES_REMOVE,
+		recipes
+	}
+}
+
 
 export function setDates (start) {
 	return {
@@ -57,6 +65,12 @@ export function removeFromCalendar ({day, meal}) {
 		type: REMOVE_FROM_CALENDAR,
 		day,
 		meal,
+	}
+}
+
+export function clearCalendar () {
+	return {
+		type: CLEAR_MEALS,
 	}
 }
 

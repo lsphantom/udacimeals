@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
+//import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { HashRouter, Route, Switch } from 'react-router-dom'
 import { addRecipe, removeFromCalendar } from '../actions'
 import { capitalize } from '../utils/helper'
 import Modal from 'react-modal'
@@ -105,10 +106,10 @@ class App extends Component {
       breakfast && result.push(breakfast)
       lunch && result.push(lunch)
       dinner && result.push(dinner)
-      console.log(result);
+
       return result
     }, [])
-    .reduce((ings, { ingredients }) => ings.concat(ingredients), [])
+    .reduce((ings, { ingredientLines }) => ings.concat(ingredientLines), [])
   }
   render() {
     const { foodModalOpen, loadingFood, food, ingredientsModalOpen } = this.state
@@ -117,7 +118,7 @@ class App extends Component {
       <div className="App">
 
         {/* Routing */}
-        <BrowserRouter>
+        <HashRouter>
           <Switch>
             <Route exact path="/" render={() =>
               <WeeklyMeals openAddFoodModal={this.openFoodModal} shoppingListModal={this.openIngredientsModal} />
@@ -128,7 +129,7 @@ class App extends Component {
             <Route exact path="/recipes/new/" component={NewRecipe} />
             <Route path="/recipes/:recipe_id" component={RecipeDetails} />
           </Switch>
-        </BrowserRouter>
+        </HashRouter>
 
 
 
@@ -170,7 +171,7 @@ class App extends Component {
 
                   <div className="search-modal-myrecipes">
                     <hr />
-                    <p>Add from your recipes:</p>
+                    <h5>Add from your recipes:</h5>
                   
 
                   {myRecipes && myRecipes.length > 0
@@ -181,7 +182,7 @@ class App extends Component {
                         this.closeFoodModal()
                       }}
                     />
-                    : <p>You don't have any recipes.</p>
+                    : <p className="i-note">- You have not created any recipes yet -</p>
                   }
 
                   </div>

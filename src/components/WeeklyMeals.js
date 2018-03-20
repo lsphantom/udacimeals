@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { fetchRecipes } from '../utils/api'
-import { addRecipe, removeFromCalendar, setDates } from '../actions'
+import { addRecipe, removeFromCalendar, clearCalendar, setDates, clearDates } from '../actions'
 import { Link } from 'react-router-dom'
 import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o'
 import DatePicker from 'react-datepicker'
@@ -106,7 +106,11 @@ render (){
               onChange={this.handleDateChange}
               filterDate={this.isWeekday}
               placeholderText="Select a weekday"
-            />
+            >
+            <div className="date-clearing">
+              <a href="" onClick={(e) => {e.preventDefault(); this.props.resetCalendarDates()}}>clear dates</a> | <a className="danger-txt" href="" onClick={() => this.props.clearCalendar()}>clear all meals</a>
+            </div>
+            </DatePicker>
           </div>
 
            <ul className="day-list">
@@ -189,6 +193,8 @@ function mapDispatchToProps (dispatch) {
     selectRecipe: (data) => dispatch(addRecipe(data)),
     remove: (data) => dispatch(removeFromCalendar(data)),
     setStartingDate: (data) => dispatch(setDates(data)),
+    resetCalendarDates: () => dispatch(clearDates()),
+    clearCalendar: () => dispatch(clearCalendar()),
   }
 }
 
