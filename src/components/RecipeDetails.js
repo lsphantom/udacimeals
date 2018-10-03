@@ -2,9 +2,21 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { deleteFromMyRecipes } from '../actions'
-
+import Modal from 'react-modal'
 
 class RecipeDetails extends Component {
+
+state = {
+	confirmationModalShow: false
+}
+showModal = (e) => {
+	e.preventDefault();
+	this.setState({confirmationModalShow: true});
+}
+hideModal = (e) => {
+	e.preventDefault();
+	this.setState({confirmationModalShow: false});
+}
 
 deleteRecipe = (e) => {
 	e.preventDefault();
@@ -57,6 +69,22 @@ render(){
 						  </div>
 						: null
 					}
+
+					{ recipe.steps
+						? <div className="recipe-detail-instructions">
+								<h6>Instructions:</h6>
+								<ol id="steps-preview-list">
+									{
+										recipe.steps.length === 0
+										? null
+										: recipe.steps.map((step, index) => 
+											<li key={index}><span className="step-identifier">{index + 1}</span> {step}</li>
+										)
+									}
+								</ol>
+							</div>
+						: null
+					}
 					
 					{ recipe.wwPoints !== null
 						? <div className="recipe-detail-instructions">
@@ -66,10 +94,24 @@ render(){
 					}
 
 					<br/>
-					<a href="" className="btn btn-sm btn-danger" onClick={(e) => this.deleteRecipe(e)}>Delete Recipe</a>
+					<a href="" className="btn btn-sm btn-danger" onClick={(e) => this.showModal(e)}>Delete Recipe</a>
 					</div>
 				</div>
 			)}
+
+
+			<Modal 
+				className="modal"
+				overlayClassName="overlay"
+				isOpen={this.state.confirmationModalShow}
+				onRequestClose={this.hideModal}
+				contentLabel="Modal"
+			>
+				<h2>Are you sure you want to delete this recipe?</h2>
+				<p><em>There's no way to get it back...</em></p>
+					<a href="" className="btn btn-sm btn-danger" onClick={(e) => this.deleteRecipe(e)}>Yes, Delete Recipe</a>
+					<a href="" className="btn btn-sm btn-default" onClick={(e) => this.hideModal(e)}>No, Cancel</a>				
+			</Modal>
 
 		</div>
 	)

@@ -15,6 +15,7 @@ state = {
 	ingredients: [],
 	ingredientLines: [],
 	instructions: '',
+	steps: [],
 	wwPoints: null,
 	ingredientName: '',
 	ingredientQuantity: '1',
@@ -62,6 +63,22 @@ clearIngredientEntries(){
 	})
 }
 
+addStep(event){
+	event.preventDefault();
+	let directions = this.state.steps;
+	let currentStep = this.state.instructions;
+	directions.push(currentStep);
+	this.clearInstructionStep();
+}
+removeStep(step){
+	let currentSteps = this.state.steps;
+	let newSteps = currentSteps.filter( (e, index) => index !== step );
+	this.setState({steps: newSteps});
+}
+clearInstructionStep(){
+	this.setState({	instructions: '' })
+}
+
 addNewRecipe(e){
 	e.preventDefault();
 	let recipeID = uuidv4();
@@ -73,6 +90,7 @@ addNewRecipe(e){
 		ingredients: this.state.ingredients,
 		ingredientLines: this.state.ingredientLines,
 		instructions: this.state.instructions,
+		steps: this.state.steps,
 		wwPoints: this.state.wwPoints,
 	}
 
@@ -81,7 +99,7 @@ addNewRecipe(e){
 }
 
 render(){
-	const {label, instructions, ingredients} = this.state;
+	const {label, instructions, ingredients, steps} = this.state;
 	return (
 		<div>
 			<nav id="secondaryNav" className="navbar navbar-expand-lg">
@@ -138,13 +156,27 @@ render(){
 						<hr/>
 
 						<p className="add-recipe-form-heading">Let's add some cooking instructions <span className="redbull">&bull;</span></p>
+						<div className="instructions-row">
 						<textarea id="instructions"
 								type="text" 
 								className="form-control"
-								placeholder="Recipe instructions"
+								placeholder="Recipe instruction step"
 								value={this.state.instructions}
 								onChange={(event) => this.handleInputChange(event)}
 						></textarea>
+						<input id="step-submit" type="submit" className="form-control" value="Add" disabled={instructions === '' ? true : false} onClick={(event) => this.addStep(event)} />
+						</div>
+
+						<ol id="steps-preview-list">
+							{
+								steps.length === 0
+								? null
+								: steps.map((step, index) => 
+									<li key={index}><span className="step-identifier">{index + 1}</span> {step} <a href="" onClick={(e) => {e.preventDefault(); this.removeStep(index)}}>x</a></li>
+								)
+							}
+						</ol>
+						
 					  
 					  <hr/>
 					  <p className="add-recipe-form-heading">Let's add a point system</p>
@@ -160,7 +192,7 @@ render(){
 						<input id="submit-recipe"
 								type="submit"
 								className="btn btn-primary btn-block"
-								disabled={label.length === 0 || instructions.length === 0 ? true : false}
+								disabled={label.length === 0 || steps.length === 0 ? true : false}
 								value="Submit"
 								onClick={(e) => this.addNewRecipe(e)}
 						/>

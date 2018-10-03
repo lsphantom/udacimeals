@@ -145,9 +145,21 @@ h1,h2,h3,h4,h5,h6 {
   font-size: 30px;
 }
 
+.instructions-row textarea,
+.instructions-row input {
+  display: inline;
+  vertical-align: top;
+}
+
 .add-recipe-form #instructions {
   font-size: 12px;
   font-weight: 500;
+  width: 90%;
+  margin-right: 2%;
+}
+
+#step-submit {
+  width: 8%;
 }
 
 .add-recipe-form-heading {
@@ -177,7 +189,8 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 
-#ingredients-preview-list {
+#ingredients-preview-list,
+#steps-preview-list {
   border: 1px dashed #ddd;
   border-radius: 2px;
   padding: 10px 40px;
@@ -191,9 +204,36 @@ h1,h2,h3,h4,h5,h6 {
   font-size: 13px;
   color: #444;
 }
-#ingredients-preview-list li a {
+#steps-preview-list li {
+  padding:10px 20px;
+  border: 2px solid rgba(208,236,208,0.6);
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+#ingredients-preview-list li a,
+#steps-preview-list li a {
   color: red;
   margin-left: 10px;
+}
+#steps-preview-list li {
+  font-size: 13px;
+  position: relative;
+}
+.step-identifier {
+  width: 24px;
+  height: 24px;
+  background-color: #62daa8;
+  color: #fff;
+  display: block;
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  margin-top: -12px;
+  margin-left: -12px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 50%;
+  padding-top: 2px;
 }
 
 .point-system {
@@ -656,10 +696,10 @@ li {
   background-color: #eee;
   height: 100%;
   position: absolute;
-  width: 80%;
   right: 0;
+  left: 0;
   top: 0px;
-  padding-top: 60px;
+  padding: 60px 40px;
 }
 
 .add-recipe a {
@@ -766,7 +806,7 @@ border: 0;
   font-size: 45px;
   font-weight: bold;
   color: #fff;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.35);
 }
 
 
