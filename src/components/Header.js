@@ -3,11 +3,12 @@ import {Link} from 'react-router-dom'
 import Printer from 'react-icons/lib/fa/print'
 import EditIcon from 'react-icons/lib/fa/edit'
 import ListIcon from 'react-icons/lib/fa/list-alt'
+import UserIcon from 'react-icons/lib/md/account-circle'
 
 
 class Header extends Component {
 render (){
-	const {page, print, printAllow, openIngredientsModal, printToggle} = this.props;
+	const {page, print, printAllow, openIngredientsModal, printToggle, userModal} = this.props;
 	let currentPage = (page === 0 ? "Weekly Meals" : "My Kitchen");
 	let oppositePage = (page !== 0 ? "Weekly Meals" : "My Kitchen");
 	let linkTo = (page === 0 ? "/kitchen" : "/");
@@ -28,6 +29,9 @@ render (){
                   ? <EditIcon size={18}/>
                   : <Printer size={18}/>
                 }
+              </a>
+              <a href="" onClick={(e) => userModal(e)} title="User">
+                <UserIcon size={19}/>
               </a>
             </div>
           </div>

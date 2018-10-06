@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { fetchRecipes } from '../utils/api'
 import { addRecipe, removeFromCalendar, clearCalendar, setDates, clearDates } from '../actions'
 import { Link } from 'react-router-dom'
+import Modal from 'react-modal'
 import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
@@ -16,6 +17,7 @@ class WeeklyMeals extends Component {
   state = {
     printVersion: false,
     startDate: moment(),
+    showUserModal: false,
   }
 
   trim = (str) => (
@@ -71,8 +73,17 @@ class WeeklyMeals extends Component {
     this.setState(() => ({ printVersion: !this.state.printVersion }))
   }
 
+  openUserModal = (e) => {
+    e.preventDefault();
+    this.setState({showUserModal:true});
+  }
+  closeUserModal = () => {
+    this.setState({showUserModal:false});
+  }
+
+
 render (){
-	const { printVersion } = this.state
+	const { printVersion, showUserModal } = this.state
     const { calendar, remove } = this.props
     const mealOrder = ['breakfast', 'lunch', 'dinner']
     let printClass =  printVersion ? 'printable' : ''
@@ -84,7 +95,8 @@ render (){
 				print={printVersion}
 				printAllow={true}
 				openIngredientsModal={this.props.shoppingListModal}
-				printToggle={this.printToggle} />
+        printToggle={this.printToggle}
+        userModal={(e) => this.openUserModal(e)} />
 
 
 		{/* Calendar and Meal Grid */}
@@ -161,6 +173,17 @@ render (){
 
           </div>
         </div>
+        
+        <Modal
+          className='modal'
+          overlayClassName='overlay'
+          isOpen={showUserModal}
+          onRequestClose={this.closeUserModal}
+          ariaHideApp={false}
+          contentLabel='Modal'>
+            USER MODAL
+        </Modal>
+
 
         <Footer/>
 		</div>
