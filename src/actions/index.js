@@ -74,9 +74,10 @@ export function clearCalendar () {
 	}
 }
 
-export function addToPantry ({name, unit, quantity}) {
+export function addToPantry ({id, name, unit, quantity}) {
 	return {
 		type: ADD_ITEM_TO_PANTRY,
+		id,
 		name,
 		unit,
 		quantity,

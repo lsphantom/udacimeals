@@ -140,13 +140,15 @@ function calendar (state = initialCalendarState, action) {
 	}
 }
 
-const initialPantryState = {
-	item_name: {
-		name: null,
-		unit: null,
-		quantity: 0
-	}
-}
+const initialPantryState = [
+	{
+		id: 0,
+		name: 'Item Sample',
+		unit: 'Unit Name',
+		quantity: 0.0
+	},
+]
+	
 
 function pantry (state = initialPantryState, action) {
 

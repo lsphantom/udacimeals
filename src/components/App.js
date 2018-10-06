@@ -19,6 +19,10 @@ import 'react-datepicker/dist/react-datepicker.css'
 
 const uuidv1 = require('uuid/v1');
 
+
+//NOTES***************************
+//Let's default to local storage until logged in, then save to server.
+
 class App extends Component {
   state = {
     foodModalOpen: false,
@@ -139,6 +143,7 @@ class App extends Component {
           overlayClassName='overlay'
           isOpen={foodModalOpen}
           onRequestClose={this.closeFoodModal}
+          ariaHideApp={false}
           contentLabel='Modal'
         >
           <div className="search-results">
@@ -196,6 +201,7 @@ class App extends Component {
           overlayClassName='overlay'
           isOpen={ingredientsModalOpen}
           onRequestClose={this.closeIngredientsModal}
+          ariaHideApp={false}
           contentLabel='Modal'>
         {ingredientsModalOpen && <ShoppingList list={this.generateShoppingList()}/>}
         </Modal>

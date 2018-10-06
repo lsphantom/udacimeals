@@ -9,6 +9,7 @@ import moment from 'moment'
 
 import StartDateButton from './StartDateButton'
 import Header from './Header'
+import Footer from './Footer';
 
 
 class WeeklyMeals extends Component {
@@ -161,7 +162,7 @@ render (){
           </div>
         </div>
 
-
+        <Footer/>
 		</div>
 	)
 }

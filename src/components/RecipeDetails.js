@@ -18,8 +18,18 @@ hideModal = (e) => {
 	this.setState({confirmationModalShow: false});
 }
 
-deleteRecipe = (e) => {
+confirmPrompt = (e) => {
 	e.preventDefault();
+	if (window.confirm("Are you sure you want to delete this recipe? \nThere's no way to get it back...")) {
+		// Trash it!
+		this.deleteRecipe();
+	} else {
+		// Keep it!
+	}
+}
+
+deleteRecipe = () => {
+	//e.preventDefault();
 	const currentRecipes = this.props.recipes.myRecipes;
 	const recipe = this.props.match.params.recipe_id;
 	let newRecipes = currentRecipes.filter((r) => (r.id !== recipe));
@@ -94,23 +104,26 @@ render(){
 					}
 
 					<br/>
-					<a href="" className="btn btn-sm btn-danger" onClick={(e) => this.showModal(e)}>Delete Recipe</a>
+					<a href="" className="btn btn-sm btn-danger" onClick={(e) => this.confirmPrompt(e)}>Delete Recipe</a>
 					</div>
 				</div>
 			)}
 
 
-			<Modal 
+			<Modal
 				className="modal"
 				overlayClassName="overlay"
 				isOpen={this.state.confirmationModalShow}
 				onRequestClose={this.hideModal}
+				ariaHideApp={false}
 				contentLabel="Modal"
 			>
+				<div id="delete-prompt-modal">
 				<h2>Are you sure you want to delete this recipe?</h2>
 				<p><em>There's no way to get it back...</em></p>
 					<a href="" className="btn btn-sm btn-danger" onClick={(e) => this.deleteRecipe(e)}>Yes, Delete Recipe</a>
-					<a href="" className="btn btn-sm btn-default" onClick={(e) => this.hideModal(e)}>No, Cancel</a>				
+					<a href="" className="btn btn-sm btn-default" onClick={(e) => this.hideModal(e)}>No, Cancel</a>		
+				</div>
 			</Modal>
 
 		</div>
