@@ -157,6 +157,7 @@ class App extends Component {
                   <h3 className='subheader'>
                     Add a meal for {capitalize(this.state.day)} {this.state.meal}.
                   </h3>
+                  <form action="">
                   <div className='search'>
                     <input
                       className='form-control'
@@ -165,11 +166,13 @@ class App extends Component {
                       ref={(input) => this.input = input}
                     />
                     <button
+                      type="submit"
                       className='search-btn'
                       onClick={this.searchFood}>
                         <ArrowRightIcon size={30}/>
                     </button>
                   </div>
+                  </form>
                   {food !== null && (
                     <FoodList
                       food={food}

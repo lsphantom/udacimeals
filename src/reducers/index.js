@@ -4,8 +4,6 @@ import {
 	REMOVE_RECIPE,
 	MY_RECIPES_ADD,
 	MY_RECIPES_REMOVE,
-	EX_RECIPES_ADD,
-	EX_RECIPES_REMOVE,
 	SET_DATES,
 	CLEAR_DATES,
 	REMOVE_FROM_CALENDAR,
@@ -38,24 +36,13 @@ function recipes (state = initialRecipesState, action) {
 	switch (action.type) {
 		case MY_RECIPES_ADD :
 			return {
-				myRecipes: [...state.myRecipes, recipe],
-				edamamRecipes: [...state.edamamRecipes],
+				myRecipes: [...state.myRecipes, recipe]
 			}
 		case MY_RECIPES_REMOVE :
 			return {
 				myRecipes: recipes,
-				edamamRecipes: [...state.edamamRecipes],
 			}
-		case EX_RECIPES_ADD :
-			return {
-				myRecipes: [...state.myRecipes],
-				edamamRecipes: [...state.edamamRecipes, recipe],
-			}
-		case EX_RECIPES_REMOVE :
-			return {
-				myRecipes: [...state.myRecipes],
-				edamamRecipes: recipes,
-			}
+
 		default:
 			return state
 	}

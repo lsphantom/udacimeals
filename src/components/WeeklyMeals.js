@@ -151,7 +151,7 @@ render (){
                     <div className="remove-meal">
                       <a href="" onClick={(e) => {e.preventDefault(); remove({meal, day}); }}>x</a>
                     </div>
-                    <Link to={`/meals/${day}/${meal}`}>
+                    <Link to={`/meals/${day}/${meal}`} title={meals[meal].label}>
                     <div className="meal-thumb" style={{backgroundImage: `url(${meals[meal].image})`}}></div>
                     {/*<img className="img-fluid"
                       src={meals[meal].image}

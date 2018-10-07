@@ -20,7 +20,7 @@ hideModal = (e) => {
 
 confirmPrompt = (e) => {
 	e.preventDefault();
-	if (window.confirm("Are you sure you want to delete this recipe? \nThere's no way to get it back...")) {
+	if (window.confirm("Are you sure you want to delete this recipe?")) {
 		// Trash it!
 		this.deleteRecipe();
 	} else {
@@ -49,12 +49,25 @@ render(){
 				<div className="recipe-image-banner" style={{backgroundImage: `url(${recipe.image})`}}></div>
 					<div className="container recipe-detail-textbox">
 					<p className="recipe-detail-title">{recipe.label}</p>
-					{recipe.ingredients.length > 0
+					{recipe.source == null && recipe.ingredients.length > 0
 						? <div className="recipe-detail-ingredients">
 							<h6>Ingredients:</h6>
 							<ul>
 								{ recipe.ingredients.map((ing, index) =>
 									<li key={index}>{`${ing.quantity} ${ing.unit} ${ing.name}`}</li>
+									)
+								}
+							</ul>
+						  </div>
+						: null
+					}
+
+					{recipe.source && recipe.ingredientLines.length > 0
+						? <div className="recipe-detail-ingredients">
+							<h6>Ingredients:</h6>
+							<ul>
+								{ recipe.ingredientLines.map((ing, index) =>
+									<li key={index}>{ing}</li>
 									)
 								}
 							</ul>
@@ -86,8 +99,17 @@ render(){
 							</div>
 						: null
 					}
+
+					{ recipe.url
+						? <div className="recipe-detail-instructions">
+						<h6>Source URL:</h6>
+							<a href={recipe.url} target="_blank">{recipe.url}</a>
+						  </div>
+						: null
+					}
+
 					
-					{ recipe.wwPoints !== null
+					{ recipe.source == null && recipe.wwPoints !== null
 						? <div className="recipe-detail-instructions">
 							<h6><span className="ww-circle-logo"></span> {recipe.wwPoints} {recipe.wwPoints > 1 ? 'Points' : 'Point'}</h6>
 						  </div>

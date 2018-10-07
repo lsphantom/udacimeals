@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import SecondaryNav from './SecondaryNav'
-import {addEdmRecipeToMyRecipes} from '../actions'
+import {addToMyRecipes} from '../actions'
 
 class MealOfDay extends Component {
 
-addToMyRecipes = (e, recipe) => {
+saveRecipe = (e, recipe) => {
 	e.preventDefault();
 	this.props.addRecipe(recipe);
 }
@@ -22,7 +22,7 @@ render (){
 			<div className="container">
 				<h6>{recipeOnScope}</h6>
 				<p>** If it contains source and not already in recipes.edamamRecipes display add to my recipes button **</p>
-				<a type="button" href="" onClick={(e) => this.addToMyRecipes(e, recipeObject)} className="btn btn-primary">+ Add to my recipes</a>
+				<a type="button" href="" onClick={(e) => this.saveRecipe(e, recipeObject)} className="btn btn-primary">+ Add to my recipes</a>
 			</div>
 			
 		</div>
@@ -36,7 +36,7 @@ function mapStateToProps({calendar, recipes, food}){
 }
 function mapDispatchToProps(dispatch){
 	return {
-		addRecipe: (data) => dispatch(addEdmRecipeToMyRecipes(data))
+		addRecipe: (data) => dispatch(addToMyRecipes(data))
 	}
 }
 

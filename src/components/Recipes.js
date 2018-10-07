@@ -3,8 +3,16 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 class Recipes extends Component {
+
+trim (str) {
+return str.length > 36
+	? str.slice(0, 36) + '...'
+	: str
+}
+
 render (){
-	const {myRecipes, edamamRecipes} = this.props.recipes;
+	const {myRecipes} = this.props.recipes;
+	
 	return (
 		<div id="recipes">
 			<h4>My Recipes</h4>
@@ -22,28 +30,13 @@ render (){
 			<div className="my-recipes-list">
 			{myRecipes.length > 0
 				? myRecipes.map((recipe, index) =>
-					<Link to={`/recipes/${recipe.id}`} key={index}>
+					<Link to={`/recipes/${recipe.id}`} key={index} title={recipe.label}>
 					<div className="my-recipes-item">
 					<div className="my-recipes-item-thumb">
 						<div className="img-thumb" style={{backgroundImage: `url(${recipe.image})`}}></div>
 						{/*<img className="img-fluid" src={recipe.image} alt={recipe.label} />*/}
 					</div>
-					<p className="my-recipes-item-label">{recipe.label}</p>
-					</div>
-					</Link> )
-				: null
-			}
-			</div>
-			
-			<div className="my-recipes-list">
-			{edamamRecipes.length > 0
-				? edamamRecipes.map((recipe, index) =>
-					<Link to={`/recipes/${recipe.id}`} key={index}>
-					<div className="my-recipes-item">
-					<div className="my-recipes-item-thumb">
-						<div className="img-thumb" style={{backgroundImage: `url(${recipe.image})`}}></div>
-					</div>
-					<p className="my-recipes-item-label">{recipe.label}</p>
+					<p className={`my-recipes-item-label ${recipe.source ? 'ed-rec' : 'my-rec'}`}>{this.trim(recipe.label)}</p>
 					</div>
 					</Link> )
 				: null

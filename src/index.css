@@ -115,7 +115,13 @@ h1,h2,h3,h4,h5,h6 {
   font-weight: bold;
   color: #bd985c;
   margin: 10px auto;
+  height: 50px;
+}
+.ed-rec {
   border-bottom: 2px solid #56CC9D;
+}
+.my-rec {
+  border-bottom: 2px solid #ff5b18;
 }
 
 .center {
@@ -642,6 +648,13 @@ li {
 }
 
 .food-list img {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  border-radius: 3px;
+}
+
+.search-modal-myrecipes .food-list img {
   width: 150px;
   height: 100px;
   margin: 0 auto;
