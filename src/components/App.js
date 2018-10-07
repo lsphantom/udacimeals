@@ -17,6 +17,7 @@ import RecipeDetails from './RecipeDetails'
 import NewRecipe from './NewRecipe'
 import HelpPage from './HelpPage'
 import 'react-datepicker/dist/react-datepicker.css'
+import MealOfDay from './MealOfDay';
 
 const uuidv1 = require('uuid/v1');
 
@@ -133,6 +134,7 @@ class App extends Component {
             }/>
             <Route exact path="/recipes/new/" component={NewRecipe} />
             <Route path="/recipes/:recipe_id" component={RecipeDetails} />
+            <Route path="/meals/:day/:meal/" component={MealOfDay} />
             <Route path="/help" component={HelpPage} />
           </Switch>
         </HashRouter>

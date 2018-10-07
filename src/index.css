@@ -47,8 +47,8 @@ h1,h2,h3,h4,h5,h6 {
   float: none;
   margin: 4px auto;
 }
-
-.app-alert-warning {
+.app-brandname h4 {
+  text-transform: capitalize;
 }
 
 .left-nav-links a,
@@ -938,4 +938,9 @@ body < #weekly-meals.printable {
 }
 #help-list li li {
   margin-left: 40px;
+}
+
+.meal-ofday {
+  background-color: #fff;
+  height: 100vh;
 }

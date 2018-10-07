@@ -46,6 +46,19 @@ export function deleteFromMyRecipes ( recipes ) {
 	}
 }
 
+export function addEdmRecipeToMyRecipes ( recipe ) {
+	return {
+		type: EX_RECIPES_ADD,
+		recipe
+	}
+}
+
+export function deleteEdmFromMyRecipes ( recipes ) {
+	return {
+		type: EX_RECIPES_REMOVE,
+		recipes
+	}
+}
 
 export function setDates (start) {
 	return {

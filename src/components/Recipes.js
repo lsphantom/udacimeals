@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 class Recipes extends Component {
 render (){
-	const {myRecipes} = this.props.recipes;
+	const {myRecipes, edamamRecipes} = this.props.recipes;
 	return (
 		<div id="recipes">
 			<h4>My Recipes</h4>
@@ -19,7 +19,6 @@ render (){
 				: <p className="i-note">- You have not created any recipes yet -</p>
 			}
 			
-
 			<div className="my-recipes-list">
 			{myRecipes.length > 0
 				? myRecipes.map((recipe, index) =>
@@ -35,9 +34,21 @@ render (){
 				: null
 			}
 			</div>
-
-
 			
+			<div className="my-recipes-list">
+			{edamamRecipes.length > 0
+				? edamamRecipes.map((recipe, index) =>
+					<Link to={`/recipes/${recipe.id}`} key={index}>
+					<div className="my-recipes-item">
+					<div className="my-recipes-item-thumb">
+						<div className="img-thumb" style={{backgroundImage: `url(${recipe.image})`}}></div>
+					</div>
+					<p className="my-recipes-item-label">{recipe.label}</p>
+					</div>
+					</Link> )
+				: null
+			}
+			</div>
 
 		</div>
 	)
