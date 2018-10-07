@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import SecondaryNav from './SecondaryNav'
 import UserIcon from 'react-icons/lib/md/account-circle'
 import DateSelect from 'react-icons/lib/fa/caret-square-o-down'
 import CalendarIcon from 'react-icons/lib/fa/calendar-plus-o'
@@ -9,14 +10,12 @@ import ListIcon from 'react-icons/lib/fa/list-alt'
 class HelpPage extends Component {
 
 render (){
-	const copyYear = new Date().getFullYear();
 
 	return (
 		<div id="help-page">
-			<div className="container">
-				<h2 className="center">Welcome to Bare Necessities!</h2>
-				<hr/>
+			<SecondaryNav title="Bare Necessities - Weekly Meal Prep" routeBack="/" />
 
+			<div className="container">
 				<ul id="help-list">
 					<li><h5>What's Bare Necessities?</h5>
 						<p>Simply a progressive web app to help track weekly meals for prepping and cooking.</p>
@@ -51,18 +50,7 @@ render (){
 						<h5>See your shopping list</h5>
 						<p>To see and edit your shopping list click on the shopping list icon <ListIcon size={15}/> on the top right.</p>
 					</li>
-				</ul>
-				
-
-				
-
-				
-
-
-				
-				
-
-			
+				</ul>		
 			</div>
 		</div>
 	)

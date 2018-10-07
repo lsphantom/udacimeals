@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import { deleteFromMyRecipes } from '../actions'
 import Modal from 'react-modal'
+import SecondaryNav from './SecondaryNav';
 
 class RecipeDetails extends Component {
 
@@ -43,16 +43,7 @@ render(){
 	const {recipe_id} = this.props.match.params;
 	return (
 		<div className="recipe-wrap">
-			<nav id="secondaryNav" className="navbar navbar-expand-lg">
-			<div className="container-fluid">
-				<div className="left-nav-links">
-					<Link to="/kitchen" className="close-create-recipe" />
-				</div>
-				<div className="app-brandname">
-					<h4>Recipe Details</h4>
-				</div>
-			</div>
-			</nav>
+			<SecondaryNav title="Recipe Details" routeBack="/kitchen" />
 			{ this.props.recipes.myRecipes.filter((recipe) => recipe.id === recipe_id).map((recipe, index) => 
 				<div className="recipe-detail-item" key={index}>
 				<div className="recipe-image-banner" style={{backgroundImage: `url(${recipe.image})`}}></div>
