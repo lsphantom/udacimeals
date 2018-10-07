@@ -181,9 +181,14 @@ render (){
           onRequestClose={this.closeUserModal}
           ariaHideApp={false}
           contentLabel='Modal'>
-            USER MODAL
+            <form id="signin-form" action="">
+              <p>Login</p>
+              <input type="text" placeholder="Username" className="form-control"></input>
+              <input type="password" placeholder="Password" className="form-control"></input>
+              <input type="submit" value="Sign In" className="btn btn-primary btn-block" />
+              <p>Not a registered user? <a href="mailto:info@limestripes.com?Subject=Account%20request:%20Bare%20necessities">Request an account</a></p>
+            </form>
         </Modal>
-
 
         <Footer/>
 		</div>
