@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { deleteFromMyRecipes } from '../actions'
 import Modal from 'react-modal'
-import SecondaryNav from './SecondaryNav';
+import SecondaryNav from './SecondaryNav'
+import {Link} from 'react-router-dom'
 
 class RecipeDetails extends Component {
 
@@ -46,9 +47,14 @@ render(){
 			<SecondaryNav title="Recipe Details" routeBack="/kitchen" />
 			{ this.props.recipes.myRecipes.filter((recipe) => recipe.id === recipe_id).map((recipe, index) => 
 				<div className="recipe-detail-item" key={index}>
-				<div className="recipe-image-banner" style={{backgroundImage: `url(${recipe.image})`}}></div>
+				<div className="recipe-image-banner" style={{backgroundImage: `url(${recipe.image})`}}>
+				<div className="banner-fade-overlay">
+					<div className="container">
+						<p className="recipe-detail-title">{recipe.label}</p>
+					</div>
+				</div>
+				</div>
 					<div className="container recipe-detail-textbox">
-					<p className="recipe-detail-title">{recipe.label}</p>
 					{recipe.source == null && recipe.ingredients.length > 0
 						? <div className="recipe-detail-ingredients">
 							<h6>Ingredients:</h6>
@@ -74,7 +80,6 @@ render(){
 						  </div>
 						: null
 					}
-
 
 					{ recipe.instructions
 						? <div className="recipe-detail-instructions">
@@ -117,6 +122,8 @@ render(){
 					}
 
 					<br/>
+					<Link to={`/recipes/edit/${recipe_id}`} className="btn btn-sm btn-primary">Edit Recipe</Link>
+					&nbsp;
 					<a href="" className="btn btn-sm btn-danger" onClick={(e) => this.confirmPrompt(e)}>Delete Recipe</a>
 					</div>
 				</div>

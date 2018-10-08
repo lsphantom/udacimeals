@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-//import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 import { addRecipe, removeFromCalendar } from '../actions'
 import { capitalize } from '../utils/helper'
@@ -15,6 +14,7 @@ import WeeklyMeals from './WeeklyMeals'
 import MyKitchen from './MyKitchen'
 import RecipeDetails from './RecipeDetails'
 import NewRecipe from './NewRecipe'
+import EditRecipe from './EditRecipe'
 import HelpPage from './HelpPage'
 import 'react-datepicker/dist/react-datepicker.css'
 import MealOfDay from './MealOfDay';
@@ -133,6 +133,7 @@ class App extends Component {
               <MyKitchen />
             }/>
             <Route exact path="/recipes/new/" component={NewRecipe} />
+            <Route path="/recipes/edit/:recipe_id" component={EditRecipe} />
             <Route path="/recipes/:recipe_id" component={RecipeDetails} />
             <Route path="/meals/:day/:meal/" component={MealOfDay} />
             <Route path="/help" component={HelpPage} />

@@ -810,9 +810,20 @@ border: 0;
   background-color: #ddd;
   background-size: cover;
   background-position: center center;
+  position: relative;
 }
-.recipe-detail-textbox{
+/*.recipe-detail-textbox{
   margin-top: -85px;
+}*/
+.banner-fade-overlay {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#000000+0,000000+100&0.65+0,0+35 */
+    background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0) 45%, rgba(0,0,0,0.8) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 45%,rgba(0,0,0,0.8) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0) 45%,rgba(0,0,0,0.8) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+    overflow: hidden;
+    height: 100%;
+    z-index: 2;
 }
 .recipe-detail-ingredients ul li {
   list-style-type: disc;
@@ -828,6 +839,9 @@ border: 0;
   font-weight: bold;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0,0,0,0.35);
+  position: absolute;
+  bottom: -10px;
+  line-height: 0.9em;
 }
 
 
@@ -953,7 +967,49 @@ body < #weekly-meals.printable {
   margin-left: 40px;
 }
 
+/* MEAL CONTAINERS */
 .meal-ofday {
   background-color: #fff;
   height: 100vh;
+}
+.breakfast-container {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffb032+0,fcde32+37,fed468+37,fed468+45,fee2a2+45,fee2a2+50,fbf6e7+50,fbf6e7+52,ffffff+52,ffffff+52 */
+background: #ffb032; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover, #ffb032 0%, #fcde32 37%, #fed468 37%, #fed468 45%, #fee2a2 45%, #fee2a2 50%, #fbf6e7 50%, #fbf6e7 52%, #ffffff 52%, #ffffff 52%); /* FF3.6-15 */
+background: -webkit-radial-gradient(center, ellipse cover, #ffb032 0%,#fcde32 37%,#fed468 37%,#fed468 45%,#fee2a2 45%,#fee2a2 50%,#fbf6e7 50%,#fbf6e7 52%,#ffffff 52%,#ffffff 52%); /* Chrome10-25,Safari5.1-6 */
+background: radial-gradient(ellipse at center, #ffb032 0%,#fcde32 37%,#fed468 37%,#fed468 45%,#fee2a2 45%,#fee2a2 50%,#fbf6e7 50%,#fbf6e7 52%,#ffffff 52%,#ffffff 52%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb032', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+background-size: 800px 800px;
+background-repeat: no-repeat;
+background-position: -380px -380px;
+background-color: #fff;
+}
+.lunch-container {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffcf32+0,fcde32+37,ffde4f+37,ffbc42+37,fffba3+45,fffba3+45,edf9ff+52,f2fbff+53,bfecff+70 */
+background: #ffcf32; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover, #ffcf32 0%, #fcde32 37%, #ffde4f 37%, #ffbc42 37%, #fffba3 45%, #fffba3 45%, #edf9ff 52%, #f2fbff 53%, #bfecff 70%); /* FF3.6-15 */
+background: -webkit-radial-gradient(center, ellipse cover, #ffcf32 0%,#fcde32 37%,#ffde4f 37%,#ffbc42 37%,#fffba3 45%,#fffba3 45%,#edf9ff 52%,#f2fbff 53%,#bfecff 70%); /* Chrome10-25,Safari5.1-6 */
+background: radial-gradient(ellipse at center, #ffcf32 0%,#fcde32 37%,#ffde4f 37%,#ffbc42 37%,#fffba3 45%,#fffba3 45%,#edf9ff 52%,#f2fbff 53%,#bfecff 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcf32', endColorstr='#bfecff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+background-repeat: no-repeat;
+background-position: 50% -500px;
+background-size: 1000px 800px;
+background-color: #BFECFF;
+}
+.dinner-container {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ed932d+0,ffc532+35,ed7e3d+35,ffb168+45,bf907c+50,bf907c+50,a49fb7+70 */
+background: #ed932d; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover, #ed932d 0%, #ffc532 35%, #ed7e3d 35%, #ffb168 45%, #bf907c 50%, #bf907c 50%, #a49fb7 70%); /* FF3.6-15 */
+background: -webkit-radial-gradient(center, ellipse cover, #ed932d 0%,#ffc532 35%,#ed7e3d 35%,#ffb168 45%,#bf907c 50%,#bf907c 50%,#a49fb7 70%); /* Chrome10-25,Safari5.1-6 */
+background: radial-gradient(ellipse at center, #ed932d 0%,#ffc532 35%,#ed7e3d 35%,#ffb168 45%,#bf907c 50%,#bf907c 50%,#a49fb7 70%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ed932d', endColorstr='#a49fb7',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+background-repeat: no-repeat;
+background-position: right -380px top -380px;
+background-size: 800px 800px;
+background-color: #A49FB7;
+}
+
+
+#edit-recipe-container nav {
+  background-color: #007bff;
 }
