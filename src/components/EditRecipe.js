@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { addToMyRecipes } from '../actions'
+import { editMyRecipe } from '../actions'
 import SecondaryNav from './SecondaryNav'
-
-const uuidv4 = require('uuid/v4');
 
 
 class EditRecipe extends Component {
@@ -71,7 +69,6 @@ removeEdmIngredient(ingredient){
 	let {ingredients, ingredientLines} = this.state;
 	let newIngredients = ingredients.filter((ing, index) => index !== ingredient);
 	let newIngredientLines = ingredientLines.filter((ing, index) => index !== ingredient);
-	console.log(newIngredientLines);
 	this.setState({
 		ingredients: newIngredients,
 		ingredientLines: newIngredientLines,
@@ -101,31 +98,33 @@ clearInstructionStep(){
 	this.setState({	instructions: '' })
 }
 
-addNewRecipe(e){
-	e.preventDefault();
-	let recipeID = uuidv4();
+pushChanges(recipes){
+	//find index and remove recipe from array
+	const currentRecipeId = this.state.currentRecipe.id;
+	let currentRecipe = this.state.currentRecipe;
+	const recipeIndex = recipes.map((r) => r.id).indexOf(currentRecipeId);
+	let newRecipes = recipes;
 
-	let newRecipe = {
-		id: recipeID,
-		label: this.state.label,
-		image: this.state.imageURL,
-		ingredients: this.state.ingredients,
-		ingredientLines: this.state.ingredientLines,
-		instructions: this.state.instructions,
-		steps: this.state.steps,
-		wwPoints: this.state.wwPoints,
-	}
+	//modify recipe
+		currentRecipe.label = this.state.label;
+		currentRecipe.image = this.state.imageURL;
+		currentRecipe.ingredientLines = this.state.ingredientLines;
+		currentRecipe.steps = this.state.steps;
+		currentRecipe.wwPoints = this.state.wwPoints;
+	
+	//modify array
+		newRecipes[recipeIndex] = currentRecipe;
 
-	this.props.dispatch(addToMyRecipes(newRecipe));
+	//push array with modified recipe
+	this.props.dispatch(editMyRecipe(newRecipes));
 	this.props.history.push('/kitchen');
 }
 
 componentDidMount(){
 	const thisRecipeID = this.props.match.params.recipe_id;
-	const {myRecipes} = this.props.recipes;
+	const myRecipes = this.props.recipes.myRecipes;
 	let thisRecipe = myRecipes.filter((r) => (r.id === thisRecipeID));
 		thisRecipe = thisRecipe[0];
-
 
 	if (thisRecipe.source){
 		this.setState({
@@ -135,13 +134,14 @@ componentDidMount(){
 			ingredients: thisRecipe.ingredientLines,
 			ingredientLines: thisRecipe.ingredientLines,
 			instructions: '',
-			steps: [],
+			steps: thisRecipe.steps ? thisRecipe.steps : [],
 			wwPoints: thisRecipe.wwPoints,
 			ingredientName: '',
 			ingredientQuantity: '1',
 			ingredientUnit: '',
 			source: thisRecipe.source,
 			edm: true,
+			currentRecipe: thisRecipe,
 		})
 	} else {
 		this.setState({
@@ -164,6 +164,9 @@ componentDidMount(){
 
 render(){
 	const {label, instructions, ingredients, steps, wwPoints, edm} = this.state;
+	const {recipe_id} = this.props.match.params;
+	const currentRecipes = this.props.recipes.myRecipes;
+
 	return (
 		<div id="edit-recipe-container">
 			<SecondaryNav title="Edit Recipe" routeBack="/kitchen" />
@@ -217,11 +220,11 @@ render(){
 						
 						<ol id="steps-preview-list">
 							{
-								steps.length === 0
-								? null
-								: steps.map((step, index) => 
+								steps.length > 0
+								?  steps.map((step, index) => 
 									<li key={index}><span className="step-identifier">{index + 1}</span> {step} <a href="" onClick={(e) => {e.preventDefault(); this.removeStep(index)}}>x</a></li>
 								)
+								: null
 							}
 						</ol>
 						<div className="instructions-row">
@@ -250,9 +253,9 @@ render(){
 						<input id="submit-recipe"
 								type="submit"
 								className="btn btn-primary btn-block"
-								disabled={label.length === 0 || steps.length === 0 ? true : false}
+								disabled={label.length === 0 ? true : false}
 								value="Save"
-								onClick={(e) => this.addNewRecipe(e)}
+								onClick={(e) => {e.preventDefault(); this.pushChanges(currentRecipes)}}
 						/>
 					</div>
 				</form>

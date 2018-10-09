@@ -4,6 +4,7 @@ import {
 	REMOVE_RECIPE,
 	MY_RECIPES_ADD,
 	MY_RECIPES_REMOVE,
+	MY_RECIPES_EDIT,
 	SET_DATES,
 	CLEAR_DATES,
 	REMOVE_FROM_CALENDAR,
@@ -39,6 +40,10 @@ function recipes (state = initialRecipesState, action) {
 				myRecipes: [...state.myRecipes, recipe]
 			}
 		case MY_RECIPES_REMOVE :
+			return {
+				myRecipes: recipes,
+			}
+		case MY_RECIPES_EDIT :
 			return {
 				myRecipes: recipes,
 			}

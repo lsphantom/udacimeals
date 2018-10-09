@@ -3,6 +3,7 @@ export const REMOVE_RECIPE = 'REMOVE_RECIPE'
 
 export const MY_RECIPES_ADD = 'MY_RECIPES_ADD'
 export const MY_RECIPES_REMOVE = 'MY_RECIPES_REMOVE'
+export const MY_RECIPES_EDIT = 'MY_RECIPES_EDIT'
 
 export const SET_DATES = 'SET_DATES'
 export const CLEAR_DATES = 'CLEAR_DATES'
@@ -40,6 +41,13 @@ export function addToMyRecipes ( recipe ) {
 export function deleteFromMyRecipes ( recipes ) {
 	return {
 		type: MY_RECIPES_REMOVE,
+		recipes
+	}
+}
+
+export function editMyRecipe ( recipes ) {
+	return {
+		type: MY_RECIPES_EDIT,
 		recipes
 	}
 }
