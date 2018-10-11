@@ -1013,3 +1013,7 @@ background-color: #A49FB7;
 #edit-recipe-container nav {
   background-color: #007bff;
 }
+#edit-recipe-container nav h4,
+#edit-recipe-container nav a.close-create-recipe {
+  color: #fff;
+}

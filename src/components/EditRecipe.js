@@ -98,16 +98,16 @@ clearInstructionStep(){
 	this.setState({	instructions: '' })
 }
 
-pushChanges(recipes){
+pushChanges(recipeID, recipes){
 	//find index and remove recipe from array
-	const currentRecipeId = this.state.currentRecipe.id;
 	let currentRecipe = this.state.currentRecipe;
-	const recipeIndex = recipes.map((r) => r.id).indexOf(currentRecipeId);
+	const recipeIndex = recipes.map((r) => r.id).indexOf(recipeID);
 	let newRecipes = recipes;
 
 	//modify recipe
 		currentRecipe.label = this.state.label;
 		currentRecipe.image = this.state.imageURL;
+		currentRecipe.ingredients = this.state.ingredients;
 		currentRecipe.ingredientLines = this.state.ingredientLines;
 		currentRecipe.steps = this.state.steps;
 		currentRecipe.wwPoints = this.state.wwPoints;
@@ -117,7 +117,7 @@ pushChanges(recipes){
 
 	//push array with modified recipe
 	this.props.dispatch(editMyRecipe(newRecipes));
-	this.props.history.push('/kitchen');
+	this.props.history.push('/recipes/' + recipeID);
 }
 
 componentDidMount(){
@@ -157,6 +157,7 @@ componentDidMount(){
 			ingredientQuantity: '1',
 			ingredientUnit: '',
 			edm: false,
+			currentRecipe: thisRecipe,
 		})
 	}
 	
@@ -255,7 +256,7 @@ render(){
 								className="btn btn-primary btn-block"
 								disabled={label.length === 0 ? true : false}
 								value="Save"
-								onClick={(e) => {e.preventDefault(); this.pushChanges(currentRecipes)}}
+								onClick={(e) => {e.preventDefault(); this.pushChanges(recipe_id, currentRecipes)}}
 						/>
 					</div>
 				</form>

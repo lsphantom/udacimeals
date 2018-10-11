@@ -53,8 +53,23 @@ render(){
 						<p className="recipe-detail-title">{recipe.label}</p>
 					</div>
 				</div>
+				
+
 				</div>
+
 					<div className="container recipe-detail-textbox">
+					<div className="row">
+						<div className="col-sm-6">
+						{/* Add fave heart */}
+						</div>
+						<div className="col-sm-6" style={{textAlign:"right"}}>
+							<Link to={`/recipes/edit/${recipe_id}`} className="btn btn-sm btn-primary">Edit Recipe</Link>
+							&nbsp;
+							<a href="" className="btn btn-sm btn-danger" onClick={(e) => this.confirmPrompt(e)}>Delete Recipe</a>
+						</div>
+					</div>
+
+
 					{recipe.source == null && recipe.ingredients.length > 0
 						? <div className="recipe-detail-ingredients">
 							<h6>Ingredients:</h6>
@@ -89,7 +104,7 @@ render(){
 						: null
 					}
 
-					{ recipe.steps
+					{ recipe.steps && recipe.steps.length>0
 						? <div className="recipe-detail-instructions">
 								<h6>Instructions:</h6>
 								<ol id="steps-preview-list">
@@ -122,9 +137,7 @@ render(){
 					}
 
 					<br/>
-					<Link to={`/recipes/edit/${recipe_id}`} className="btn btn-sm btn-primary">Edit Recipe</Link>
-					&nbsp;
-					<a href="" className="btn btn-sm btn-danger" onClick={(e) => this.confirmPrompt(e)}>Delete Recipe</a>
+					
 					</div>
 				</div>
 			)}
