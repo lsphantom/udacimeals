@@ -1017,3 +1017,65 @@ background-color: #A49FB7;
 #edit-recipe-container nav a.close-create-recipe {
   color: #fff;
 }
+
+/*.mod-steps {
+  border: 2px solid #ccc;
+  border-radius: 25px;
+  margin: 40px auto;
+}*/
+.recipe-showcase-left {
+  position: relative;
+}
+.recipe-showcase-right {
+  text-align: center;
+}
+.step-showcase-counter{
+  position: absolute;
+  background-color: #e8e3f7;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  text-align: center;
+  top: 0px;
+  right: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.recipe-lg-thumb {
+  width: 300px;
+  height: 460px;
+  border-radius: 20px;
+  margin: 20px auto;
+  background-color: #ddd;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  box-shadow: 5px 5px 10px rgba(0,0,0,.2);
+}
+
+.mod-step {
+  padding: 5px;
+  margin: 10px auto;
+  border-radius: 8px;
+  font-size: 12px;
+  display: none;
+}
+.mod-step.active {
+  background-color: #e8e3f7;
+  padding: 10px;
+  font-size: 17px;
+  line-height: 1.3em;
+  display: block;
+}
+.mod-step.pre-active {
+  display: block;
+  opacity: 0.4;
+}
+.mod-step.active + .mod-step {
+  display: block;
+}
+.mod-step.active + .mod-step + .mod-step {
+  display: block;
+  opacity: 0.4;
+}
