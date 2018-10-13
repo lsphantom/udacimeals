@@ -1031,7 +1031,6 @@ background-color: #A49FB7;
 }
 .step-showcase-counter{
   position: absolute;
-  background-color: #e8e3f7;
   width: 36px;
   height: 36px;
   border-radius: 50%;
@@ -1054,6 +1053,21 @@ background-color: #A49FB7;
   box-shadow: 5px 5px 10px rgba(0,0,0,.2);
 }
 
+.breakfast-container .mod-step.active,
+.breakfast-container .step-showcase-counter {
+  background-color: #90d644;
+  color: #fff;
+}
+.lunch-container .mod-step.active,
+.lunch-container .step-showcase-counter {
+  background-color: #f77119;
+  color: #fff;
+}
+.dinner-container .mod-step.active,
+.dinner-container .step-showcase-counter {
+  background-color: #e8e3f7;
+}
+
 .mod-step {
   padding: 5px;
   margin: 10px auto;
@@ -1062,7 +1076,6 @@ background-color: #A49FB7;
   display: none;
 }
 .mod-step.active {
-  background-color: #e8e3f7;
   padding: 10px;
   font-size: 17px;
   line-height: 1.3em;
@@ -1071,6 +1084,8 @@ background-color: #A49FB7;
 .mod-step.pre-active {
   display: block;
   opacity: 0.4;
+  height: 40px;
+  overflow: hidden;
 }
 .mod-step.active + .mod-step {
   display: block;
@@ -1078,4 +1093,23 @@ background-color: #A49FB7;
 .mod-step.active + .mod-step + .mod-step {
   display: block;
   opacity: 0.4;
+}
+.no-recipes .mod-step {
+  display: block;
+}
+.step-navigator {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+}
+.larr {
+  margin-right: 10px;
+}
+.rarr,
+.larr {
+  border-radius: 50%;
+}
+.next-step-button,
+.previous-step-button {
+  display: inline-block;
 }

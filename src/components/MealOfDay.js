@@ -21,6 +21,18 @@ removeRecipe = (e, recipe) => {
 	//Dispatch action
 	this.props.deleteRecipe(newRecipes);
 }
+handlePreviousStep = (e) => {
+	e.preventDefault();
+	this.setState({
+		currentStep: this.state.currentStep -1,
+	});
+}
+handleNextStep = (e) => {
+	e.preventDefault();
+	this.setState({
+		currentStep: this.state.currentStep +1,
+	});
+}
 
 render (){
 	const {calendar, recipes, food} = this.props;
@@ -51,10 +63,7 @@ render (){
 					: null
 				}
 
-				{ recipeObject.url
-					? <a href={recipeObject.url} target="_blank">Open original recipe &rarr;</a>
-					: null
-				}
+				
 
 					
 				{ recipeObject.steps && recipeObject.steps.length>0
@@ -65,9 +74,35 @@ render (){
 						</div>
 						)}
 					  </div>
+					: <div className="mod-steps no-recipes">
+							<div className="mod-step">
+							<p>No recipe instructions available.</p>
+								{ recipeObject.url
+									? <a href={recipeObject.url} target="_blank">See the original recipe &rarr;</a>
+									: null
+								}
+							</div>
+						</div>
+				}
+
+				
+				<div className="step-navigator">
+				{ recipeObject.steps && activeStep !== 0
+					? <div className="previous-step-button">
+					  	<a href="" className="btn btn-primary larr" onClick={(e) => this.handlePreviousStep(e)}>&larr;</a>
+					  </div>
 					: null
 				}
+
+				{ recipeObject.steps && activeStep<recipeObject.steps.length-1
+					? <div className="next-step-button">
+					  	<a href="" className="btn btn-primary rarr" onClick={(e) => this.handleNextStep(e)}>&rarr;</a>
+					  </div>
+					: null
+				}
+				</div>
 				
+
 				</div>
 
 				<div className="col-sm-6 recipe-showcase-right">
