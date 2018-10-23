@@ -921,6 +921,7 @@ body < #weekly-meals.printable {
 /* FOOTER */
 #footer {
   position: fixed;
+  z-index: 1050;
   bottom: 0;
   left: 0;
   right: 0;
@@ -1112,4 +1113,74 @@ background-color: #A49FB7;
 .next-step-button,
 .previous-step-button {
   display: inline-block;
+}
+
+/* Sign-In Sidebar*/
+#signin-sidebar {
+  position: fixed;
+  top: 0;
+  left: -450px;
+  z-index: 1040;
+  width: 450px;
+  height: 100%;
+  background-color: #000;
+  color: #fff;
+  padding: 100px 50px;
+  transition: ease-out 0.3s all;
+}
+#signin-sidebar.active {
+  left: 0px;
+}
+#signin-overlay {
+  position: fixed;
+  top:0;
+  right:0;
+  bottom:0;
+  left:0;
+  z-index: 1035;
+  background-color: rgba(0,0,0,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: ease-out 0.3s all;
+}
+#signin-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+#signin-form input {
+  margin-bottom: 20px;
+}
+#signin-form label {
+  font-size: 80%;
+  margin-bottom: 4px;
+}
+#register-text {
+  margin-top: 40px;
+  font-size: 80%;
+}
+#signin-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-weight: bold;
+  font-size: 1.2em;
+  color:#fff;
+  text-decoration: none;
+}
+#signin-close:hover,
+#signin-close:focus {
+  color: #007bff;
+}
+input.entrybox {
+  background-color: transparent !important;
+  color: #fff !important;
+  border: 2px solid #eee;
+}
+/* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  box-shadow: 0 0 0 30px transparent inset;
+  background-color: none !important;
 }
