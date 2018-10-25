@@ -5,12 +5,13 @@ class ShoppingList extends Component {
   render(){
     const {list} = this.props;
   return (
-    <div className="shopping-list-wrap">
+    <div>
       <SecondaryNav title="Shopping List" routeBack="/"  />
-      <div className='ingredients-list container'>
+      <div className="shopping-list-wrap container-fluid">
+      <div className="ingredients-list container">
         { list.length < 1
           ? <p>-No items for your shopping list-</p>
-          : <ul className='shopping-list'>
+          : <ul className="shopping-list">
               {list.map((item, index) => (
                 <li key={index}>
                   {item}
@@ -20,7 +21,7 @@ class ShoppingList extends Component {
         }
       </div>
     </div>
-      
+    </div>
     )
   }  
 }

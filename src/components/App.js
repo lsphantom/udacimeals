@@ -116,6 +116,9 @@ class App extends Component {
       return result
     }, [])
     .reduce((ings, { ingredientLines }) => ings.concat(ingredientLines), [])
+    .filter((elem, pos, arr) => {
+      return arr.indexOf(elem) === pos;
+    })
   }
   render() {
     const { foodModalOpen, loadingFood, food, ingredientsModalOpen } = this.state

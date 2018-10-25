@@ -1,11 +1,13 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import Modal from 'react-modal'
 import SecondaryNav from './SecondaryNav'
 import {addToMyRecipes, deleteFromMyRecipes} from '../actions'
 
 class MealOfDay extends Component {
 state = {
 	currentStep: 0,
+	showIngredients: false
 }
 
 saveRecipe = (e, recipe) => {
@@ -33,6 +35,18 @@ handleNextStep = (e) => {
 		currentStep: this.state.currentStep +1,
 	});
 }
+openIngModal = (e) => {
+	e.preventDefault();
+	this.setState({
+		showIngredients: true,
+	});
+}
+closeIngModal = (e) => {
+	e.preventDefault();
+	this.setState({
+		showIngredients: false,
+	});
+}
 
 render (){
 	const {calendar, recipes, food} = this.props;
@@ -47,27 +61,42 @@ render (){
 			<SecondaryNav title={day + "'s " + meal} routeBack="/" />
 			<div className="container" >
 			<div className="row">
+				<div className="col-sm-12"><h3>{recipeOnScope}</h3> </div>
+			</div>
+
+			<div className="row">
 				<div className="col-sm-6 recipe-showcase-left">
-				<h3>{recipeOnScope}</h3> 
+				
+
 				{ recipeObject.steps && recipeObject.steps.length>0
 					? <div className="step-showcase-counter">{activeStep + 1}</div>
 					: null
 				}
 
 				{ recipeObject.source && inMyRecipes.length === 0
-					? <a href="" onClick={(e) => this.saveRecipe(e, recipeObject)} className="btn btn-primary">+ Save to my recipes</a>
+					? <div>
+						<a href="" onClick={(e) => this.saveRecipe(e, recipeObject)} className="btn btn-primary">+ Save to my recipes</a>
+					  	<br/><br/>
+					  </div>
 					: null
 				}
 				{ recipeObject.source && inMyRecipes.length > 0
-					? <a href="" onClick={(e) => this.removeRecipe(e, recipeObject)} className="btn btn-primary btn-add-recipe">- Remove from my recipes</a>
+					? <div>
+						<a href="" onClick={(e) => this.removeRecipe(e, recipeObject)} className="btn btn-primary btn-add-recipe">- Remove from my recipes</a>
+					  	<br/><br/>
+					  </div>
 					: null
 				}
 
-				
+
+				{ recipeObject.ingredientLines && recipeObject.ingredientLines.length>0
+					? <a href="" onClick={(e) => this.openIngModal(e)}>Ingredients List</a>
+					: null
+				}
 
 					
 				{ recipeObject.steps && recipeObject.steps.length>0
-					? <div className="mod-steps">
+					? <div className="mod-steps">{/*<h6>Instructions</h6>*/}
 						{recipeObject.steps.map((step, index) => 
 						<div key={index} className={`mod-step ${index === activeStep ? 'active': ''} ${index === activeStep -1 ? 'pre-active' : ''}`}>
 							{step}
@@ -94,7 +123,7 @@ render (){
 					: null
 				}
 
-				{ recipeObject.steps && activeStep<recipeObject.steps.length-1
+				{ recipeObject.steps && activeStep < recipeObject.steps.length-1
 					? <div className="next-step-button">
 					  	<a href="" className="btn btn-primary rarr" onClick={(e) => this.handleNextStep(e)}>&rarr;</a>
 					  </div>
@@ -111,6 +140,32 @@ render (){
 				</div>
 			</div>
 			
+
+			<Modal
+				className='modal'
+				overlayClassName='overlay'
+				isOpen={this.state.showIngredients}
+				onRequestClose={this.closeIngModal}
+				ariaHideApp={false}
+				contentLabel='Modal'>
+				<div className="mod-ingredients">
+				<h4 className="center">Ingredients List</h4>
+				<hr/>
+				<ul className="modal-ing-list">
+					{ recipeObject.ingredients && recipeObject.ingredients.length>0 
+						?	recipeObject.ingredients.map((ing, index) => 
+								<li key={index}>
+									{  ing.quantity
+										? `${ing.quantity} ${ing.unit} - ${ing.name}`
+										: `${ing.text}`
+									}			
+								</li> )
+						: 	recipeObject.ingredientLines.map((ing, index) => 
+								<li key={index}>{ing}</li> )
+					}
+				</ul>
+				</div>
+			</Modal>
 		</div>
 	)
 }
