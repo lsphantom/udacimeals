@@ -137,6 +137,8 @@ class App extends Component {
             <Route path="/recipes/:recipe_id" component={RecipeDetails} />
             <Route path="/meals/:day/:meal/" component={MealOfDay} />
             <Route path="/help" component={HelpPage} />
+            <Route path="/shopping" render={() => 
+              <ShoppingList list={this.generateShoppingList()} />} />
           </Switch>
         </HashRouter>
 

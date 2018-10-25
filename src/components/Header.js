@@ -8,7 +8,7 @@ import UserIcon from 'react-icons/lib/md/account-circle'
 
 class Header extends Component {
 render (){
-	const {page, print, printAllow, openIngredientsModal, printToggle, userModal} = this.props;
+	const {page, print, printAllow, printToggle, userModal} = this.props;
 	let currentPage = (page === 0 ? "Weekly Meals" : "My Kitchen");
 	let oppositePage = (page !== 0 ? "Weekly Meals" : "My Kitchen");
 	let linkTo = (page === 0 ? "/kitchen" : "/");
@@ -23,7 +23,8 @@ render (){
               <Link to="/">{currentPage}</Link>
             </div>
             <div className={`right-nav-links ${printAllow ? '' : 'hidden'}`}>
-              <a href="" onClick={openIngredientsModal} title="Shopping List"><ListIcon size={18}/></a>
+              {/*<a href="" onClick={openIngredientsModal} title="Shopping List"><ListIcon size={18}/></a>*/}
+              <Link to="shopping"><ListIcon size={18}/></Link>
               <a href="" onClick={printToggle} title="Print / Edit">
                 { print
                   ? <EditIcon size={18}/>

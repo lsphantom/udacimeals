@@ -5,6 +5,9 @@ import Modal from 'react-modal'
 import SecondaryNav from './SecondaryNav'
 import {Link} from 'react-router-dom'
 
+import EditIcon from 'react-icons/lib/md/create'
+import TrashIcon from 'react-icons/lib/fa/trash'
+
 class RecipeDetails extends Component {
 
 state = {
@@ -63,9 +66,13 @@ render(){
 						{/* Add fave heart */}
 						</div>
 						<div className="col-sm-6" style={{textAlign:"right"}}>
-							<Link to={`/recipes/edit/${recipe_id}`} className="btn btn-sm btn-primary">Edit Recipe</Link>
+							<Link to={`/recipes/edit/${recipe_id}`} className="btn btn-sm btn-primary round-btn" title="Edit Recipe">
+								<EditIcon size={18} />
+							</Link>
 							&nbsp;
-							<a href="" className="btn btn-sm btn-danger" onClick={(e) => this.confirmPrompt(e)}>Delete Recipe</a>
+							<a href="" className="btn btn-sm btn-danger round-btn" onClick={(e) => this.confirmPrompt(e)} title="Delete Recipe">
+								<TrashIcon size={18} />
+							</a>
 						</div>
 					</div>
 

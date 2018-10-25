@@ -838,7 +838,7 @@ border: 0;
   font-size: 45px;
   font-weight: bold;
   color: #fff;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.35);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.45);
   position: absolute;
   bottom: -10px;
   line-height: 0.9em;
@@ -914,6 +914,12 @@ body < #weekly-meals.printable {
   padding-bottom: 0px;
   min-height: 30px;
   color: #eee;
+}
+
+.round-btn {
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
 }
 
 
