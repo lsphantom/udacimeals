@@ -8,6 +8,10 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from './reducers'
 import { Provider } from 'react-redux'
 import { loadState, saveState } from './utils/helper'
+import thunk from 'redux-thunk'
+import { reduxFirestore, getFirestore } from 'redux-firestore'
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
+import fbConfig from './utils/config'
 
 
 const logger = store => next => action => {
@@ -25,7 +29,11 @@ const persistedState = loadState();
 const store = createStore(
 	reducer,
   persistedState,
-	composeEnhancers(applyMiddleware(logger))
+	composeEnhancers(
+    applyMiddleware(logger, thunk.withExtraArgument({getFirebase, getFirestore})),
+    reduxFirestore(fbConfig),
+    reactReduxFirebase(fbConfig)
+  )
 )
 
 store.subscribe( () => {

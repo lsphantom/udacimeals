@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { firestoreReducer } from 'redux-firestore'
 import {
 	ADD_RECIPE,
 	REMOVE_RECIPE,
@@ -158,4 +159,5 @@ export default combineReducers({
 	calendar,
 	dates,
 	pantry,
+	firestore: firestoreReducer,
 })

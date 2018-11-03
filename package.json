@@ -6,6 +6,7 @@
   "dependencies": {
     "bootstrap": "^4.0.0",
     "e": "0.0.4",
+    "firebase": "^5.5.7",
     "jquery": "^3.3.1",
     "moment": "^2.20.1",
     "react": "^16.2.0",
@@ -16,10 +17,12 @@
     "react-loading": "^1.0.5",
     "react-modal": "^3.4.5",
     "react-redux": "^5.0.7",
+    "react-redux-firebase": "^2.1.9",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
     "reactstrap": "^5.0.0-beta",
     "redux": "^3.7.2",
+    "redux-firestore": "^0.5.8",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {

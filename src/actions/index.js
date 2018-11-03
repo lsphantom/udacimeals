@@ -13,12 +13,28 @@ export const CLEAR_MEALS = 'CLEAR_MEALS'
 
 export const ADD_ITEM_TO_PANTRY = 'ADD_ITEM_TO_PANTRY'
 
-export function addRecipe ({ day, meal, recipe }) {
+/*export function addRecipe ({ day, meal, recipe }) {
 	return {
 		type: ADD_RECIPE,
 		recipe,
 		day,
 		meal,
+	}
+}*/
+
+//DB TEST
+export const addRecipe = ({day, meal, recipe}) => {
+	return (dispatch, getState, { getFirebase, getFirestore }) => {
+		//make async request
+		const firestore = getFirestore();
+		firestore.collection('recipes').add({
+			day,
+			meal,
+			title: 'test title',
+			content: recipe
+		}).then(()=>{
+			dispatch({type: ADD_RECIPE, recipe, day, meal})
+		}).catch((err) => console.log(err));
 	}
 }
 

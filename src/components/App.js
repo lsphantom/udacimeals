@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
 import { HashRouter, Route, Switch } from 'react-router-dom'
 import { addRecipe, removeFromCalendar } from '../actions'
 import { capitalize } from '../utils/helper'
@@ -249,7 +251,9 @@ function mapDispatchToProps (dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  firestoreConnect([
+    {collection: 'recipes'}
+  ])
 )(App)
