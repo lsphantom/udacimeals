@@ -202,7 +202,7 @@ class App extends Component {
                         this.closeFoodModal()
                       }}
                     />
-                    : <p className="i-note">- You have not created any recipes yet -</p>
+                    : <p className="i-note">- You don't have any recipes yet -</p>
                   }
 
                   </div>

@@ -862,7 +862,7 @@ border: 0;
 
 /* Datepicker adjust */
 .date-selector .react-datepicker__day--today {
-    background-color: transparent;
+  background-color: #aaa;
 }
 .date-selector .react-datepicker__day:hover {
     background-color: #ddb574;

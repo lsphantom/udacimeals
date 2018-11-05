@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
 import SecondaryNav from './SecondaryNav'
 import {addToMyRecipes, deleteFromMyRecipes} from '../actions'
@@ -94,10 +93,7 @@ render (){
 					? <a href="" onClick={(e) => this.openIngModal(e)}>Ingredients List</a>
 					: null
 				}
-				<br/>
-				<small>
-					<Link to="/kitchen">&larr; Go to My Kitchen</Link>
-				</small>
+				
 					
 				{ recipeObject.steps && recipeObject.steps.length>0
 					? <div className="mod-steps">{/*<h6>Instructions</h6>*/}

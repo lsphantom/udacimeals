@@ -24,7 +24,7 @@ render (){
 
 			{myRecipes.length > 0 
 				? null
-				: <p className="i-note">- You have not created any recipes yet -</p>
+				: <p className="i-note">- You have not created or added any recipes yet -</p>
 			}
 			
 			<div className="my-recipes-list">

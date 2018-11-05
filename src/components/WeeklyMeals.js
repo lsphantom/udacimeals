@@ -154,10 +154,6 @@ render (){
                     </div>
                     <Link to={`/meals/${day}/${meal}`} title={meals[meal].label}>
                     <div className="meal-thumb" style={{backgroundImage: `url(${meals[meal].image})`}}></div>
-                    {/*<img className="img-fluid"
-                      src={meals[meal].image}
-                      alt={meals[meal].label}
-                       />*/}
                     <h4>{printVersion ? meals[meal].label : this.trim(meals[meal].label)}</h4>
                     </Link>
                     </div>
