@@ -11,7 +11,7 @@ return str.length > 36
 }
 
 render (){
-	const {myRecipes} = this.props.recipes;
+	const myRecipes = this.props.recipes;
 	
 	return (
 		<div id="recipes">

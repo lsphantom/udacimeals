@@ -123,8 +123,8 @@ class App extends Component {
     })
   }
   render() {
-    const { foodModalOpen, loadingFood, food, ingredientsModalOpen } = this.state
-    const { myRecipes } = this.props.recipes
+    const { foodModalOpen, loadingFood, food, ingredientsModalOpen } = this.state;
+    const myRecipes = this.props.recipes;
     return (
       <div className="App">
 

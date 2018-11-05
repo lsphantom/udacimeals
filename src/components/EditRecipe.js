@@ -122,7 +122,7 @@ pushChanges(recipeID, recipes){
 
 componentDidMount(){
 	const thisRecipeID = this.props.match.params.recipe_id;
-	const myRecipes = this.props.recipes.myRecipes;
+	const myRecipes = this.props.recipes;
 	let thisRecipe = myRecipes.filter((r) => (r.id === thisRecipeID));
 		thisRecipe = thisRecipe[0];
 
@@ -166,7 +166,7 @@ componentDidMount(){
 render(){
 	const {label, instructions, ingredients, steps, wwPoints, edm} = this.state;
 	const {recipe_id} = this.props.match.params;
-	const currentRecipes = this.props.recipes.myRecipes;
+	const currentRecipes = this.props.recipes;
 
 	return (
 		<div id="edit-recipe-container">

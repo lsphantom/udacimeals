@@ -13,30 +13,36 @@ export const CLEAR_MEALS = 'CLEAR_MEALS'
 
 export const ADD_ITEM_TO_PANTRY = 'ADD_ITEM_TO_PANTRY'
 
-/*export function addRecipe ({ day, meal, recipe }) {
+export function addRecipe ({ day, meal, recipe }) {
 	return {
 		type: ADD_RECIPE,
 		recipe,
 		day,
 		meal,
 	}
-}*/
+}
 
-//DB TEST
-export const addRecipe = ({day, meal, recipe}) => {
+export const addMealToDay = ({day, meal, recipe}) => {
+	return {
+		type: REMOVE_RECIPE,
+		recipe,
+		day,
+		meal
+	}
+}
+
+//Firestore addRecipe testing
+/*export const addRecipe = ({day, meal, recipe}) => {
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
-		//make async request
 		const firestore = getFirestore();
 		firestore.collection('recipes').add({
-			day,
-			meal,
-			title: 'test title',
+			title: recipe.label,
 			content: recipe
 		}).then(()=>{
 			dispatch({type: ADD_RECIPE, recipe, day, meal})
 		}).catch((err) => console.log(err));
 	}
-}
+}*/
 
 export function removeRecipe ({day, meal, recipes}) {
 	return {
@@ -92,15 +98,5 @@ export function removeFromCalendar ({day, meal}) {
 export function clearCalendar () {
 	return {
 		type: CLEAR_MEALS,
-	}
-}
-
-export function addToPantry ({id, name, unit, quantity}) {
-	return {
-		type: ADD_ITEM_TO_PANTRY,
-		id,
-		name,
-		unit,
-		quantity,
 	}
 }

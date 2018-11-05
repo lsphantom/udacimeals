@@ -9,8 +9,7 @@ import {
 	SET_DATES,
 	CLEAR_DATES,
 	REMOVE_FROM_CALENDAR,
-	CLEAR_MEALS,
-	ADD_ITEM_TO_PANTRY
+	CLEAR_MEALS
 } from '../actions'
 
 function food (state = {}, action) {
@@ -28,26 +27,17 @@ function food (state = {}, action) {
 	}
 }
 
-const initialRecipesState = {
-	myRecipes: [],
-	edamamRecipes: [],
-}
-
-function recipes (state = initialRecipesState, action) {
+function recipes (state = [], action) {
 	const {recipe, recipes} = action
 	switch (action.type) {
 		case MY_RECIPES_ADD :
-			return {
-				myRecipes: [...state.myRecipes, recipe]
-			}
+			return [...state, recipe]
+				
 		case MY_RECIPES_REMOVE :
-			return {
-				myRecipes: recipes,
-			}
+			return [...recipes]
+
 		case MY_RECIPES_EDIT :
-			return {
-				myRecipes: recipes,
-			}
+			return [...recipes]
 
 		default:
 			return state
@@ -133,31 +123,10 @@ function calendar (state = initialCalendarState, action) {
 	}
 }
 
-const initialPantryState = [
-	{
-		id: 0,
-		name: 'Item Sample',
-		unit: 'Unit Name',
-		quantity: 0.0
-	},
-]
-	
-
-function pantry (state = initialPantryState, action) {
-
-	switch (action.type) {
-		case ADD_ITEM_TO_PANTRY:
-			return state
-		default:
-			return state
-	}
-}
-
 export default combineReducers({
 	food,
 	recipes,
 	calendar,
 	dates,
-	pantry,
 	firestore: firestoreReducer,
 })

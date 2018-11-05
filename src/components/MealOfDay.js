@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
 import SecondaryNav from './SecondaryNav'
 import {addToMyRecipes, deleteFromMyRecipes} from '../actions'
@@ -16,7 +17,7 @@ saveRecipe = (e, recipe) => {
 }
 removeRecipe = (e, recipe) => {
 	e.preventDefault();
-	const currentRecipes = this.props.recipes.myRecipes;
+	const currentRecipes = this.props.recipes;
 	const recipeId = recipe.id;
 	let newRecipes = currentRecipes.filter((r) => (r.id !== recipeId));
 	
@@ -53,7 +54,7 @@ render (){
 	const {day, meal} = this.props.match.params;
 	const recipeOnScope = calendar[day][meal];
 	const recipeObject = food[recipeOnScope];
-	const inMyRecipes = recipes.myRecipes.filter((cr) => (cr.id === food[recipeOnScope].id) );
+	const inMyRecipes = recipes.filter((cr) => (cr.id === food[recipeOnScope].id) );
 	const activeStep = this.state.currentStep;
 
 	return (
@@ -93,7 +94,10 @@ render (){
 					? <a href="" onClick={(e) => this.openIngModal(e)}>Ingredients List</a>
 					: null
 				}
-
+				<br/>
+				<small>
+					<Link to="/kitchen">&larr; Go to My Kitchen</Link>
+				</small>
 					
 				{ recipeObject.steps && recipeObject.steps.length>0
 					? <div className="mod-steps">{/*<h6>Instructions</h6>*/}

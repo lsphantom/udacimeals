@@ -34,7 +34,7 @@ confirmPrompt = (e) => {
 
 deleteRecipe = () => {
 	//e.preventDefault();
-	const currentRecipes = this.props.recipes.myRecipes;
+	const currentRecipes = this.props.recipes;
 	const recipe = this.props.match.params.recipe_id;
 	let newRecipes = currentRecipes.filter((r) => (r.id !== recipe));
 	
@@ -48,7 +48,7 @@ render(){
 	return (
 		<div className="recipe-wrap">
 			<SecondaryNav title="Recipe Details" routeBack="/kitchen" />
-			{ this.props.recipes.myRecipes.filter((recipe) => recipe.id === recipe_id).map((recipe, index) => 
+			{ this.props.recipes.filter((recipe) => recipe.id === recipe_id).map((recipe, index) => 
 				<div className="recipe-detail-item" key={index}>
 				<div className="recipe-image-banner" style={{backgroundImage: `url(${recipe.image})`}}>
 				<div className="banner-fade-overlay">
