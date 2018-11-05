@@ -132,8 +132,8 @@ render (){
             calendar.map((day, index) => 
               <li key={index}>
                 <h3>{day.day.substring(0,3)}</h3>
-                <p>{this.props.dates !== ''
-                  ? moment(this.props.dates).add(index, 'days').format('MM/DD')
+                <p>{this.props.startdate !== 'default'
+                  ? moment(this.props.startdate).add(index, 'days').format('MM/DD')
                   : null
                 }</p>
               </li>
@@ -199,7 +199,7 @@ render (){
 
 
 
-function mapStateToProps ({ food, calendar, dates }) {
+function mapStateToProps ({ food, calendar, startdate }) {
   const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
   return {
@@ -214,7 +214,7 @@ function mapStateToProps ({ food, calendar, dates }) {
       }, {})
     })),
     food,
-    dates,
+    startdate,
   }
 }
 

@@ -44,14 +44,14 @@ function recipes (state = [], action) {
 	}
 }
 
-function dates (state = '', action) {
+function startdate (state = 'default', action) {
 	switch (action.type) {
 		case SET_DATES :
 			const start = action.start
 			return start
 
 		case CLEAR_DATES :
-			return ''
+			return 'default'
 
 		default :
 			return state
@@ -127,6 +127,6 @@ export default combineReducers({
 	food,
 	recipes,
 	calendar,
-	dates,
+	startdate,
 	firestore: firestoreReducer,
 })
