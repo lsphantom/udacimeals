@@ -9,7 +9,9 @@ import {
 	SET_DATES,
 	CLEAR_DATES,
 	REMOVE_FROM_CALENDAR,
-	CLEAR_MEALS
+	CLEAR_MEALS,
+	LOGIN_SUCCESS,
+	LOGIN_ERROR
 } from '../actions'
 
 function food (state = {}, action) {
@@ -123,10 +125,32 @@ function calendar (state = initialCalendarState, action) {
 	}
 }
 
+const initAuthState = {}
+
+const auth = (state = initAuthState, action) => {
+	switch(action.type){
+		case LOGIN_ERROR:
+			return {
+				...state,
+				authError: 'Login Failed!'
+			}
+		case LOGIN_SUCCESS:
+			console.log('login success');
+			return {
+				...state,
+				authError: null
+			}
+		default:
+			return state;
+	}
+}
+
+
 export default combineReducers({
 	food,
 	recipes,
 	calendar,
 	startdate,
+	auth,
 	firestore: firestoreReducer,
 })

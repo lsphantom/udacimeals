@@ -10,6 +10,7 @@ import moment from 'moment'
 import StartDateButton from './StartDateButton'
 import Header from './Header'
 import Footer from './Footer'
+import AuthSidebar from './AuthSidebar';
 
 
 class WeeklyMeals extends Component {
@@ -171,21 +172,7 @@ render (){
           </div>
         </div>
 
-        <a id="signin-overlay" className={sidebarClassActive} href="" onClick={(e)=>this.closeUserModal(e)}><i className="displace">close</i></a>
-        <div id="signin-sidebar" className={sidebarClassActive}>
-            <a id="signin-close" href="" onClick={(e)=>this.closeUserModal(e)}>x</a>
-            <form id="signin-form" action="">
-              <h3>Sign In</h3>
-              <label>Username</label>
-              <input type="text" placeholder="Service Unavailable" className="form-control entrybox" disabled></input>
-
-              <label>Password</label>
-              <input type="password" placeholder="Service Unavailable" className="form-control entrybox" disabled></input>
-
-              <input type="submit" value="Sign In" className="btn btn-primary btn-block" onClick={(e)=>this.closeUserModal(e)} />
-              <p id="register-text">Not a registered user? <a href="mailto:info@limestripes.com?Subject=Account%20request:%20Bare%20necessities">Request an account</a></p>
-            </form>
-        </div>
+        <AuthSidebar sidebarToggle={signinBar} closeUserModal={this.closeUserModal} />
 
         <Footer/>
 		</div>

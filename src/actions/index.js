@@ -11,7 +11,8 @@ export const CLEAR_DATES = 'CLEAR_DATES'
 export const REMOVE_FROM_CALENDAR = 'REMOVE_FROM_CALENDAR'
 export const CLEAR_MEALS = 'CLEAR_MEALS'
 
-export const ADD_ITEM_TO_PANTRY = 'ADD_ITEM_TO_PANTRY'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_ERROR = 'LOGIN_ERROR'
 
 export function addRecipe ({ day, meal, recipe }) {
 	return {
@@ -98,5 +99,21 @@ export function removeFromCalendar ({day, meal}) {
 export function clearCalendar () {
 	return {
 		type: CLEAR_MEALS,
+	}
+}
+
+
+export const signIn = (credentials) => {
+	return (dispatch, getState, {getFirebase}) => {
+		const firebase = getFirebase();
+
+		firebase.auth().signInWithEmailAndPassword(
+			credentials.email,
+			credentials.password
+		).then(() => {
+			dispatch({ type: LOGIN_SUCCESS });
+		}).catch((err) => {
+			dispatch({ type: LOGIN_ERROR, err });
+		})
 	}
 }
