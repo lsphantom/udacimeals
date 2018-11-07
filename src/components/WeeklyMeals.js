@@ -88,7 +88,6 @@ render (){
     const { calendar, remove } = this.props
     const mealOrder = ['breakfast', 'lunch', 'dinner']
     let printClass =  printVersion ? 'printable' : ''
-    let sidebarClassActive = signinBar ? 'active' : ''
 
 	return (
 		<div id="weekly-meals" className={`container ${printClass}`}>

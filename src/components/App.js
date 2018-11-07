@@ -19,7 +19,7 @@ import NewRecipe from './NewRecipe'
 import EditRecipe from './EditRecipe'
 import HelpPage from './HelpPage'
 import 'react-datepicker/dist/react-datepicker.css'
-import MealOfDay from './MealOfDay';
+import MealOfDay from './MealOfDay'
 
 const uuidv1 = require('uuid/v1');
 
@@ -254,6 +254,6 @@ function mapDispatchToProps (dispatch) {
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect([
-    {collection: 'recipes'}
+    {collection: 'userdata'}
   ])
 )(App)

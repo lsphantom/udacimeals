@@ -13,6 +13,7 @@ export const CLEAR_MEALS = 'CLEAR_MEALS'
 
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
+export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 
 export function addRecipe ({ day, meal, recipe }) {
 	return {
@@ -115,5 +116,15 @@ export const signIn = (credentials) => {
 		}).catch((err) => {
 			dispatch({ type: LOGIN_ERROR, err });
 		})
+	}
+}
+
+export const signOut = () => {
+	return (dispatch, getState, {getFirebase}) => {
+		const firebase = getFirebase();
+
+		firebase.auth().signOut().then(() => {
+			dispatch({type: LOGOUT_SUCCESS})
+		});
 	}
 }

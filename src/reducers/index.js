@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { firestoreReducer } from 'redux-firestore'
+import { firebaseReducer } from 'react-redux-firebase'
 import {
 	ADD_RECIPE,
 	REMOVE_RECIPE,
@@ -11,7 +12,8 @@ import {
 	REMOVE_FROM_CALENDAR,
 	CLEAR_MEALS,
 	LOGIN_SUCCESS,
-	LOGIN_ERROR
+	LOGIN_ERROR,
+	LOGOUT_SUCCESS
 } from '../actions'
 
 function food (state = {}, action) {
@@ -130,6 +132,7 @@ const initAuthState = {}
 const auth = (state = initAuthState, action) => {
 	switch(action.type){
 		case LOGIN_ERROR:
+			console.log('login error');
 			return {
 				...state,
 				authError: 'Login Failed!'
@@ -140,6 +143,9 @@ const auth = (state = initAuthState, action) => {
 				...state,
 				authError: null
 			}
+		case LOGOUT_SUCCESS:
+			console.log('logout success');
+			return state;
 		default:
 			return state;
 	}
@@ -153,4 +159,5 @@ export default combineReducers({
 	startdate,
 	auth,
 	firestore: firestoreReducer,
+	firebase: firebaseReducer
 })

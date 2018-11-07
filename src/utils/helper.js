@@ -20,23 +20,14 @@ export const loadState = () => {
 
 export const saveState = (state) => {
 	try {
-		const serializedState = JSON.stringify(state);
+		let mutatedState = state;
+			//delete mutatedState.firebase;
+			//delete mutatedState.firestore;
+			//delete mutatedState.auth;
+		const serializedState = JSON.stringify(mutatedState);
 		localStorage.setItem('state', serializedState);
 	} catch (err) {
 		// Log errors
+		console.log(err);
 	}
 }
-
-/*const baseRecipe = {
-	id: 12345,
-	name: "+Recipe Name+",
-	image: "+??+",
-	source: "My Recipes",
-	ingredients: [{
-		item: "Ground Beef",
-		quantity: 0.0,
-		unit: "+unit+",
-	}],
-	instructions: "",
-	wwPoints: "",
-}*/
