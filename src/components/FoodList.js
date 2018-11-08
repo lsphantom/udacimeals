@@ -23,7 +23,7 @@ export default function FoodList ({ food, onSelect }) {
           }
           {item.source
             ? <div className="item-src">{item.source}</div>
-            : <div className="item-src">My Recipes</div>
+            : <div className="item-src">Bare Necessities</div>
           }
           
         </li>

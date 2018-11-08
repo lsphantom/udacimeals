@@ -20,11 +20,7 @@ export const loadState = () => {
 
 export const saveState = (state) => {
 	try {
-		let mutatedState = state;
-			//delete mutatedState.firebase;
-			//delete mutatedState.firestore;
-			//delete mutatedState.auth;
-		const serializedState = JSON.stringify(mutatedState);
+		const serializedState = JSON.stringify(state);
 		localStorage.setItem('state', serializedState);
 	} catch (err) {
 		// Log errors

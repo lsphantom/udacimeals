@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { addToMyRecipes } from '../actions'
+import { addToMyRecipes, saveRecipeToDB } from '../actions'
 import { Link } from 'react-router-dom'
 //import ImageInput from './ImageInput'
 
@@ -82,6 +82,7 @@ clearInstructionStep(){
 addNewRecipe(e){
 	e.preventDefault();
 	let recipeID = uuidv4();
+	const userOffline = this.props.firebase.auth.isEmpty;
 
 	let newRecipe = {
 		id: recipeID,
@@ -94,7 +95,12 @@ addNewRecipe(e){
 		wwPoints: this.state.wwPoints,
 	}
 
-	this.props.dispatch(addToMyRecipes(newRecipe));
+	if (userOffline){
+		this.props.dispatch(addToMyRecipes(newRecipe));
+	} else {
+		this.props.dispatch(saveRecipeToDB(newRecipe));
+	}
+	
 	this.props.history.push('/kitchen');
 }
 
@@ -205,8 +211,8 @@ render(){
 }
 
 
-function mapStateToProps({recipes, food}){
-	return{ recipes, food, }
+function mapStateToProps({recipes, food, firebase}){
+	return{ recipes, food, firebase}
 }
 
 function mapDispatchToProps(dispatch){

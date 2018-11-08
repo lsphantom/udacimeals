@@ -18,12 +18,12 @@ render (){
 			<div className="container">
 				<ul id="help-list">
 					<li><h5>What's Bare Necessities?</h5>
-						<p>Simply a progressive web app to help track weekly meals for prepping and cooking.</p>
+						<p>Simply a web app to help track weekly meals for prepping and cooking.</p>
 						<p>The idea behind it is to make it easier to prepare a menu for the entire week, and to be able to save your recipes so you can spend less time creating shopping lists and figuring out what to eat on a daily basis.</p></li>
 					<li>
 						<h5>How to get started</h5>
-						<p>Because this is not an open app, by default your recipes and weekly menu will be saved to your web browser's local storage. So you'll need to open this app in the same browser to see any saved recipes or menus.</p>
-						<p>If you're a registered user, you can sign in through the user icon <UserIcon size={15}/> on the top right of the <strong>Weekly Meals</strong> page.</p>
+						<p>By default your recipes and weekly menu will be saved to your web browser's local storage. So you'll need to open this app in the same browser to see any saved recipes or menus.</p>
+						<p>If you're a registered user, you can sign in by clicking on the user icon <UserIcon size={15}/> on the top right of the <strong>Weekly Meals</strong> page, and entering your credentials on the sidebar.</p>
 						<ul>
 							<li>
 								<h6>Select a week</h6>

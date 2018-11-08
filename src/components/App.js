@@ -20,6 +20,7 @@ import EditRecipe from './EditRecipe'
 import HelpPage from './HelpPage'
 import 'react-datepicker/dist/react-datepicker.css'
 import MealOfDay from './MealOfDay'
+import NewUser from './NewUser';
 
 const uuidv1 = require('uuid/v1');
 
@@ -142,6 +143,7 @@ class App extends Component {
             <Route path="/recipes/:recipe_id" component={RecipeDetails} />
             <Route path="/meals/:day/:meal/" component={MealOfDay} />
             <Route path="/help" component={HelpPage} />
+            <Route path="/signup" component={NewUser} />
             <Route path="/shopping" render={() => 
               <ShoppingList list={this.generateShoppingList()} />} />
           </Switch>
@@ -254,6 +256,6 @@ function mapDispatchToProps (dispatch) {
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   firestoreConnect([
-    {collection: 'userdata'}
+    {collection: 'recipes'}
   ])
 )(App)

@@ -86,13 +86,15 @@ class WeeklyMeals extends Component {
 render (){
 	const { printVersion, signinBar } = this.state
     const { calendar, remove } = this.props
+    const { isEmpty } = this.props.firebase.auth
     const mealOrder = ['breakfast', 'lunch', 'dinner']
     let printClass =  printVersion ? 'printable' : ''
 
 	return (
 		<div id="weekly-meals" className={`container ${printClass}`}>
 		
-		<Header page={0}
+    <Header page={0}
+        offline={isEmpty}
 				print={printVersion}
 				printAllow={true}
 				openIngredientsModal={this.props.shoppingListModal}
@@ -181,7 +183,7 @@ render (){
 
 
 
-function mapStateToProps ({ food, calendar, startdate }) {
+function mapStateToProps ({ food, calendar, startdate, firebase }) {
   const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
 
   return {
@@ -197,6 +199,7 @@ function mapStateToProps ({ food, calendar, startdate }) {
     })),
     food,
     startdate,
+    firebase
   }
 }
 

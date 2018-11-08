@@ -8,7 +8,7 @@ import UserIcon from 'react-icons/lib/md/account-circle'
 
 class Header extends Component {
 render (){
-	const {page, print, printAllow, printToggle, userModal} = this.props;
+	const {page, print, printAllow, printToggle, userModal, offline} = this.props;
 	let currentPage = (page === 0 ? "Weekly Meals" : "My Kitchen");
 	let oppositePage = (page !== 0 ? "Weekly Meals" : "My Kitchen");
 	let linkTo = (page === 0 ? "/kitchen" : "/");
@@ -33,6 +33,7 @@ render (){
               </a>
               <a href="" onClick={(e) => userModal(e)} title="User">
                 <UserIcon size={19}/>
+                {offline ? null : <span className="online-marker"></span>}
               </a>
             </div>
           </div>

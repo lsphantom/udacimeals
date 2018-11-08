@@ -15,6 +15,11 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const LOGIN_ERROR = 'LOGIN_ERROR'
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 
+export const SIGNUP_FAILED = 'SIGNUP_FAILED'
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
+
+export const LOAD_DB_RECIPES = 'LOAD_DB_RECIPES'
+
 export function addRecipe ({ day, meal, recipe }) {
 	return {
 		type: ADD_RECIPE,
@@ -33,18 +38,7 @@ export const addMealToDay = ({day, meal, recipe}) => {
 	}
 }
 
-//Firestore addRecipe testing
-/*export const addRecipe = ({day, meal, recipe}) => {
-	return (dispatch, getState, { getFirebase, getFirestore }) => {
-		const firestore = getFirestore();
-		firestore.collection('recipes').add({
-			title: recipe.label,
-			content: recipe
-		}).then(()=>{
-			dispatch({type: ADD_RECIPE, recipe, day, meal})
-		}).catch((err) => console.log(err));
-	}
-}*/
+
 
 export function removeRecipe ({day, meal, recipes}) {
 	return {
@@ -61,6 +55,19 @@ export function addToMyRecipes ( recipe ) {
 		recipe
 	}
 }
+//Firestore save recipe to user
+export const saveRecipeToDB = ( recipe ) => {
+	return (dispatch, getState, { getFirebase, getFirestore }) => {
+		const firestore = getFirestore();
+		//const user = getState().firebase.auth.uid;
+		//firestore.collection('userdata').doc(user).collection('recipes').doc(recipe.id).set({ // UNABLE TO WRITE TO USER COLLECTION FOR NOW.
+		firestore.collection('recipes').doc(recipe.id).set(
+			recipe
+		).then(()=>{
+			dispatch(addToMyRecipes( recipe ));
+		}).catch((err) => console.log(err));
+	}
+}
 
 export function deleteFromMyRecipes ( recipes ) {
 	return {
@@ -73,6 +80,19 @@ export function editMyRecipe ( recipes ) {
 	return {
 		type: MY_RECIPES_EDIT,
 		recipes
+	}
+}
+//Firestore edit user's recipe
+export const editRecipeInDB = ( recipe ) => {
+	return (dispatch, getState, { getFirebase, getFirestore }) => {
+		const firestore = getFirestore();
+		const user = getState().firebase.auth.uid;
+		firestore.collection('userdata').doc(user).collection('recipes').doc(recipe.id).set({
+			recipeName: recipe.label,
+			recipeObj: recipe
+		}).then(() => {
+			//dispatch editMyRecipe but fix so that only one recipe is sent.
+		}).catch((err) => console.log(err));
 	}
 }
 
@@ -103,6 +123,29 @@ export function clearCalendar () {
 	}
 }
 
+//Firebase create new user
+export const signUp = (newUser) => {
+	return (dispatch, getState, {getFirebase, getFirestore}) => {
+		const firebase = getFirebase();
+		const firestore = getFirestore();
+
+		firebase.auth().createUserWithEmailAndPassword(
+			newUser.email,
+			newUser.password
+		).then((res) => {
+			const {uid} = res.user;
+			return firestore.collection('userdata').doc(uid).set({
+				firstName: newUser.firstName,
+				lastName: newUser.lastName
+			});
+		}).then(() => {
+			dispatch({ type: SIGNUP_SUCCESS });
+		}).catch(err => {
+			dispatch({ type: SIGNUP_FAILED });
+		})
+	}
+}
+
 
 export const signIn = (credentials) => {
 	return (dispatch, getState, {getFirebase}) => {
@@ -124,7 +167,14 @@ export const signOut = () => {
 		const firebase = getFirebase();
 
 		firebase.auth().signOut().then(() => {
-			dispatch({type: LOGOUT_SUCCESS})
+			dispatch({type: LOGOUT_SUCCESS});
 		});
+	}
+}
+
+export const loadRecipes = (recipes) => {
+	return {
+		type: LOAD_DB_RECIPES,
+		recipes
 	}
 }

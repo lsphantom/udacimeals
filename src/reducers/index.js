@@ -13,7 +13,10 @@ import {
 	CLEAR_MEALS,
 	LOGIN_SUCCESS,
 	LOGIN_ERROR,
-	LOGOUT_SUCCESS
+	LOGOUT_SUCCESS,
+	SIGNUP_FAILED,
+	SIGNUP_SUCCESS,
+	LOAD_DB_RECIPES
 } from '../actions'
 
 function food (state = {}, action) {
@@ -42,6 +45,9 @@ function recipes (state = [], action) {
 
 		case MY_RECIPES_EDIT :
 			return [...recipes]
+		
+		case LOAD_DB_RECIPES:
+			return [...state, ...recipes]
 
 		default:
 			return state
@@ -146,6 +152,19 @@ const auth = (state = initAuthState, action) => {
 		case LOGOUT_SUCCESS:
 			console.log('logout success');
 			return state;
+
+		case SIGNUP_FAILED:
+			console.log('signup failed');
+			return {
+				...state,
+				authError: action.err.message
+			}
+		case SIGNUP_SUCCESS:
+			console.log('signup success');
+			return {
+				...state,
+				authError: null
+			}
 		default:
 			return state;
 	}
