@@ -2,7 +2,8 @@ import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import { signIn, signOut, loadRecipes } from '../actions'
 import SignOutIcon from 'react-icons/lib/fa/sign-out'
-//import { Link } from 'react-router-dom'
+import CloudDownIcon from 'react-icons/lib/go/cloud-download'
+import { Link } from 'react-router-dom'
 
 
 class AuthSidebar extends Component {
@@ -32,8 +33,7 @@ signOut = (e) => {
     this.props.signOut(); 
 }
 
-loadMyRecipes = (e) => {
-    e.preventDefault();
+loadMyRecipes = () => {
     const firestoreRecipes = this.props.firestore.ordered.recipes;
     this.props.loadRecipes(firestoreRecipes);
 }
@@ -85,7 +85,7 @@ render(){
             <br/>
             <br/>
             <div className="download-button">
-                <a href="" onClick={(e) => this.loadMyRecipes(e)}>Load my recipes</a>
+                <Link to="kitchen" onClick={() => this.loadMyRecipes()}><CloudDownIcon size={18} /> Load shared recipes</Link>
             </div>
 
             <div className="logout-button">
