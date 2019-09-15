@@ -64,9 +64,10 @@ render(){
               
               <p id="register-text">
                 { authError ? <span className="danger-txt">{authError}<br/></span> : null }
-                Not a registered user? <a href="mailto:info@limestripes.com?Subject=Account%20request:%20Bare%20necessities">Request an account</a>
+                Not a registered user? 
                 <br/>
-                {/*<Link to="/signup">[DEV]: Create new user</Link>*/}
+                {/*<a href="mailto:info@limestripes.com?Subject=Account%20request:%20Bare%20necessities">Request an account</a>*/}
+                <Link to="/signup">Create an account</Link>
               </p>
               
             </form>
@@ -85,7 +86,7 @@ render(){
             <br/>
             <br/>
             <div className="download-button">
-                <Link to="kitchen" onClick={() => this.loadMyRecipes()}><CloudDownIcon size={18} /> Load shared recipes</Link>
+                <Link to="kitchen" onClick={() => this.loadMyRecipes()}><CloudDownIcon size={18} /> Import My Recipes</Link>
             </div>
 
             <div className="logout-button">

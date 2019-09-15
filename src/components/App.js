@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { HashRouter, Route, Switch } from 'react-router-dom'
-import { addRecipe, removeFromCalendar } from '../actions'
+import { setFramework, addRecipe, removeFromCalendar } from '../actions'
 import { capitalize } from '../utils/helper'
 import Modal from 'react-modal'
 import ArrowRightIcon from 'react-icons/lib/fa/arrow-circle-right'
@@ -123,11 +123,21 @@ class App extends Component {
       return arr.indexOf(elem) === pos;
     })
   }
+  componentDidMount(){
+    //TODO: Setup Offline vs Firebase version
+    //this.props.changeFramework('remote');
+  }
   render() {
     const { foodModalOpen, loadingFood, food, ingredientsModalOpen } = this.state;
     const myRecipes = this.props.recipes;
+
+
     return (
       <div className="App">
+
+        {/* OFFLINE VERSION */}
+
+        {/* FIREBASE VERSION */}
 
         {/* Routing */}
         <HashRouter>
@@ -248,6 +258,7 @@ function mapStateToProps ({ food, calendar, recipes }) {
 
 function mapDispatchToProps (dispatch) {
   return {
+    changeFramework: (data) => dispatch(setFramework(data)),
     selectRecipe: (data) => dispatch(addRecipe(data)),
     remove: (data) => dispatch(removeFromCalendar(data))
   }

@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { firestoreReducer } from 'redux-firestore'
 import { firebaseReducer } from 'react-redux-firebase'
 import {
+	APP_FRAME,
 	ADD_RECIPE,
 	REMOVE_RECIPE,
 	MY_RECIPES_ADD,
@@ -18,6 +19,15 @@ import {
 	SIGNUP_SUCCESS,
 	LOAD_DB_RECIPES
 } from '../actions'
+
+function framework (state = 'local', action) {
+	switch (action.type) {
+		case APP_FRAME :
+			return action.framework		
+		default :
+			return state
+	}
+}
 
 function food (state = {}, action) {
 	const { recipe, newSet } = action
@@ -172,6 +182,7 @@ const auth = (state = initAuthState, action) => {
 
 
 export default combineReducers({
+	framework,
 	food,
 	recipes,
 	calendar,

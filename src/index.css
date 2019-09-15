@@ -1217,3 +1217,13 @@ input:-webkit-autofill:active {
   right: 2px;
   top: 2px;
 }
+
+#new-user-container {
+  background-color: #fff;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.fineprint {
+  font-size: 10px;
+}

@@ -1,3 +1,4 @@
+export const APP_FRAME = 'APP_FRAME'
 export const ADD_RECIPE = 'ADD_RECIPE'
 export const REMOVE_RECIPE = 'REMOVE_RECIPE'
 
@@ -19,6 +20,13 @@ export const SIGNUP_FAILED = 'SIGNUP_FAILED'
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 
 export const LOAD_DB_RECIPES = 'LOAD_DB_RECIPES'
+
+export function setFramework (basis) {
+	return {
+		type: APP_FRAME,
+		framework: basis
+	}
+}
 
 export function addRecipe ({ day, meal, recipe }) {
 	return {
