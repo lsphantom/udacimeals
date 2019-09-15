@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
+import { signUp } from '../actions';
 
 class NewUser extends Component {
 
@@ -7,7 +8,7 @@ state = {
 	nuem: '',
 	nufn: '',
 	nuln: '',
-	nupw: ''
+	nupw: '',
 }
 
 handleChange(e) {
@@ -16,7 +17,18 @@ handleChange(e) {
 	})
 }
 
+createNewAccount(e) {
+	e.preventDefault();
+	this.props.createNewUser({
+		email: this.state.nuem,
+		password: this.state.nupw,
+		firstName: this.state.nufn,
+		lastName: this.state.nuln
+	});
+}
+
 render(){
+	const {authError} = this.props.auth;
 	
 	return (
 		<div className="new-user-wrap">
@@ -36,7 +48,12 @@ render(){
 
 					<label htmlFor="nupw">Password</label>
 					<input id="nupw" type="password" className="form-control" onChange={(e) => this.handleChange(e)}></input>
-
+					<br/>
+					<input id="new-user-submit" className="btn btn-primary" type="submit" value="Create account" onClick={(e) => this.createNewAccount(e)}></input>
+					<br/>
+					<p className="danger-text">
+						{ authError ? <span className="danger-txt">{authError}<br/></span> : null }
+					</p>
 					<hr/>
 					<div className="fineprint">
 						<p>By clicking Create account, I agree that:</p>
@@ -54,12 +71,14 @@ render(){
 }
 
 
-function mapStateToProps({firebase}){
-	return{firebase}
+function mapStateToProps({auth, firebase}){
+	return{auth, firebase}
 }
 
 function mapDispatchToProps(dispatch){
-	return{dispatch}
+	return{
+		createNewUser: (data) => dispatch(signUp(data)),
+	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewUser);

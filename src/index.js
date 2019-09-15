@@ -24,8 +24,8 @@ const logger = store => next => action => {
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+let persistedState = loadState();
 
-const persistedState = loadState();
 const store = createStore(
 	reducer,
   persistedState,

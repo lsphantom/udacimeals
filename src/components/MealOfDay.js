@@ -118,14 +118,14 @@ render (){
 				<div className="step-navigator">
 				{ recipeObject.steps && activeStep !== 0
 					? <div className="previous-step-button">
-					  	<a href="" className="btn btn-primary larr" onClick={(e) => this.handlePreviousStep(e)}>&larr;</a>
+					  	<a href="" className="btn btn-primary larr" onClick={(e) => this.handlePreviousStep(e)}>&uarr;</a>
 					  </div>
 					: null
 				}
 
 				{ recipeObject.steps && activeStep < recipeObject.steps.length-1
 					? <div className="next-step-button">
-					  	<a href="" className="btn btn-primary rarr" onClick={(e) => this.handleNextStep(e)}>&rarr;</a>
+					  	<a href="" className="btn btn-primary rarr" onClick={(e) => this.handleNextStep(e)}>&darr;</a>
 					  </div>
 					: null
 				}

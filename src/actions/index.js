@@ -20,6 +20,7 @@ export const SIGNUP_FAILED = 'SIGNUP_FAILED'
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 
 export const LOAD_DB_RECIPES = 'LOAD_DB_RECIPES'
+export const SAVE_DB_RECIPES = 'SAVE_DB_RECIPES'
 
 export function setFramework (basis) {
 	return {
@@ -136,19 +137,26 @@ export const signUp = (newUser) => {
 	return (dispatch, getState, {getFirebase, getFirestore}) => {
 		const firebase = getFirebase();
 		const firestore = getFirestore();
+		const {email, password, firstName, lastName} = newUser;
 
 		firebase.auth().createUserWithEmailAndPassword(
-			newUser.email,
-			newUser.password
-		).then((res) => {
+				email,
+				password
+		)
+		.then((res) => {
 			const {uid} = res.user;
-			return firestore.collection('userdata').doc(uid).set({
-				firstName: newUser.firstName,
-				lastName: newUser.lastName
-			});
-		}).then(() => {
 			dispatch({ type: SIGNUP_SUCCESS });
+			return firestore.collection('userdata').doc(uid).set({
+				calendar: {},
+				metadata: {
+					firstName,
+					lastName,
+					email
+				},
+				recipes: {}
+			});
 		}).catch(err => {
+			console.log('Unable to create DB document: ', err.code);
 			dispatch({ type: SIGNUP_FAILED });
 		})
 	}
@@ -184,5 +192,25 @@ export const loadRecipes = (recipes) => {
 	return {
 		type: LOAD_DB_RECIPES,
 		recipes
+	}
+}
+
+export const saveRecipesToCloud = (recipes) => {
+	return (dispatch, getState, { getFirestore }) => {
+		const firestore = getFirestore();
+		const user = getState().firebase.auth.uid;
+		console.log('UPDATE: ', recipes, user);
+		firestore.collection('userdata').doc(user).update({
+			recipes
+		}).then(() => {
+			console.log('Successfully updated!');
+			/*dispatch({
+				type: SAVE_DB_RECIPES,
+				recipes
+			});*/
+		}).catch((err) => {
+			console.log("Error updating document: ", err);
+		});
+		
 	}
 }

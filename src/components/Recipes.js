@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import { saveRecipesToCloud } from '../actions';
 
 class Recipes extends Component {
 
@@ -9,6 +10,13 @@ return str.length > 36
 	? str.slice(0, 36) + '...'
 	: str
 }
+
+saveToCloud (e) {
+	e.preventDefault();
+	this.props.saveRecipes(this.props.recipes);
+}
+
+
 
 render (){
 	const myRecipes = this.props.recipes;
@@ -20,7 +28,10 @@ render (){
 
 
 			<Link to="/recipes/new/" className="btn btn-primary btn-add-recipe">+ Add a recipe</Link>
-
+			&nbsp;
+			<a href="" className="btn btn-primary" onClick={(e) => this.saveToCloud(e)}>
+				<span className="glyphicon glyphicon-cloud-upload"></span> Save recipes to cloud
+			</a>
 
 			{myRecipes.length > 0 
 				? null
@@ -48,8 +59,14 @@ render (){
 }
 }
 
+function mapDispatchToProps (dispatch) {
+	return {
+	  saveRecipes: (data) => dispatch(saveRecipesToCloud(data))
+	}
+  }
+
 function mapStateToProps ({recipes}){
 	return {recipes}
 }
 
-export default connect(mapStateToProps)(Recipes)
+export default connect(mapStateToProps, mapDispatchToProps)(Recipes)

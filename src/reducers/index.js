@@ -17,7 +17,8 @@ import {
 	LOGOUT_SUCCESS,
 	SIGNUP_FAILED,
 	SIGNUP_SUCCESS,
-	LOAD_DB_RECIPES
+	LOAD_DB_RECIPES,
+	SAVE_DB_RECIPES
 } from '../actions'
 
 function framework (state = 'local', action) {
@@ -56,7 +57,10 @@ function recipes (state = [], action) {
 		case MY_RECIPES_EDIT :
 			return [...recipes]
 		
-		case LOAD_DB_RECIPES:
+		case LOAD_DB_RECIPES :
+			return [...state, ...recipes]
+
+		case SAVE_DB_RECIPES :
 			return [...state, ...recipes]
 
 		default:
@@ -167,8 +171,9 @@ const auth = (state = initAuthState, action) => {
 			console.log('signup failed');
 			return {
 				...state,
-				authError: action.err.message
-			}
+				authError: 'Signup Failed!'
+			};
+
 		case SIGNUP_SUCCESS:
 			console.log('signup success');
 			return {
