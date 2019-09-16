@@ -1171,7 +1171,8 @@ background-color: #A49FB7;
 #signin-form input {
   margin-bottom: 20px;
 }
-#signin-form label {
+#signin-form label,
+#signup-form label {
   font-size: 80%;
   margin-bottom: 4px;
 }
@@ -1223,7 +1224,9 @@ input:-webkit-autofill:active {
   border-radius: 20px;
   margin-top: 20px;
 }
-
+.create-loading {
+  margin-left: 10px;
+}
 .fineprint {
   font-size: 10px;
 }

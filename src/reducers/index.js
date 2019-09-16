@@ -171,7 +171,7 @@ const auth = (state = initAuthState, action) => {
 			console.log('signup failed');
 			return {
 				...state,
-				authError: 'Signup Failed!'
+				authError: action.error
 			};
 
 		case SIGNUP_SUCCESS:

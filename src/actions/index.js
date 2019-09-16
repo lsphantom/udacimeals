@@ -156,8 +156,8 @@ export const signUp = (newUser) => {
 				recipes: {}
 			});
 		}).catch(err => {
-			console.log('Unable to create DB document: ', err.code);
-			dispatch({ type: SIGNUP_FAILED });
+			console.log('Error occurred during signup: ', err);
+			dispatch({ type: SIGNUP_FAILED, error: err.message });
 		})
 	}
 }
